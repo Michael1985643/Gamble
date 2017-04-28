@@ -24665,3 +24665,9 @@ ion-navbar.toolbar {
     padding-top: calc(16px + 20px);
   }
 }
+
+page-login .login {
+  background: no-repeat center;
+  margin: auto;
+  display: block;
+}

@@ -1,14 +1,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Michael
+      Ionic Blank
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+  <ion-item class="text" *ngFor="let item of items | async">
+      <ion-icon name="logo-twitter" item-left></ion-icon>
+        Followers
+        <ion-badge item-right>260k</ion-badge>
+    {{item.$key}}
+  </ion-item>
+  </ion-list>
 </ion-content>
