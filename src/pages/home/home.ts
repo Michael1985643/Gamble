@@ -5,6 +5,7 @@ import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Login } from '../login/login';
 import { Subscription } from 'rxjs/Subscription';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -14,15 +15,26 @@ export class HomePage {
 
   items: FirebaseListObservable<any[]>;
   subscription: Subscription;
+  loading: any;
 
-  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService) {
-      this.items = af.database.list('/gambles')
-      this.items.subscribe(items => {
+  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
+     this.loading = this.loadingCtrl.create({
+            content: "Please wait...",
+        });
+     this.loading.present();
+     this.items = af.database.list('/items')
+     this.loading.dismiss();
+      //this.items.subscribe(items => {
     // items is an array
-    items.forEach(item => {
-        console.log('Item:', item);
-    });
-});
+   // items.forEach(item => {
+   //     console.log('Item:', item);
+   // });
+  //  this.items.subscribe((x) => alert('Reactive Firebase Working!'));
+       //const promise = af.database.object('/gambles').remove();
+    //promise
+    //  .then(_ => console.log('success'))
+     // .catch(err => console.log(err, 'You dont have access!'));
+//});
   }
 
   signInWithFacebook(): void {
@@ -31,7 +43,6 @@ export class HomePage {
   }
 
   logOut(af: AngularFire): void {
-    this.subscription.unsubscribe()
     this._auth.signOut()
       .then( success => {
           this.navCtrl.push(Login);
