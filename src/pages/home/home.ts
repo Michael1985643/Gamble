@@ -21,7 +21,7 @@ export class HomePage {
      //this.loading = this.loadingCtrl.create({
      //       content: "Please wait...",
      //   });
-     //this.loading.present();
+     //ionithis.loading.present();
      this.items = af.database.list('/items')
      //this.loading.dismiss();
       //this.items.subscribe(items => {
