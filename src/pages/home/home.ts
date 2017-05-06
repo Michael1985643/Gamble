@@ -16,13 +16,14 @@ export class HomePage {
   items: FirebaseListObservable<any[]>;
   subscription: Subscription;
   loading: any;
+  gambleOpen: boolean = true;
 
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
      this.loading = this.loadingCtrl.create({
             content: "Please wait...",
         });
      this.loading.present();
-     this.items = af.database.list('/items')
+     this.items = af.database.list('/dnb/gambles')
      this.items.subscribe(items => {
         if (items) {
           this.loading.dismiss();
