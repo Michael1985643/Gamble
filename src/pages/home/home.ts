@@ -18,12 +18,17 @@ export class HomePage {
   loading: any;
 
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
-     //this.loading = this.loadingCtrl.create({
-     //       content: "Please wait...",
-     //   });
-     //ionithis.loading.present();
+     this.loading = this.loadingCtrl.create({
+            content: "Please wait...",
+        });
+     this.loading.present();
      this.items = af.database.list('/items')
-     //this.loading.dismiss();
+     this.items.subscribe(items => {
+        if (items) {
+          this.loading.dismiss();
+        }
+     });
+     
       //this.items.subscribe(items => {
     // items is an array
    // items.forEach(item => {
