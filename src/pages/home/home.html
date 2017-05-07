@@ -12,7 +12,8 @@
 <ion-content padding>
   <ion-list>
     <ion-item class="text" *ngFor="let item of items | async">
-      <ion-card>
+      <ion-card type="button" (click)="goToItem()">
+      <img src="../../assets/images/badgeheader.jpg" width="75" />
       <ion-card-content>
         <ion-card-title>
            {{item.name}}
