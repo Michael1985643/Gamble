@@ -51,7 +51,7 @@
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button full (click)="itemClicked(item)" [class.active]="item" ion-button small>{{item.homeTeamName}}</button>
+          <button full (click)="itemClicked(item)" [class.active]="item === itemclass" ion-button small>{{item.homeTeamName}}</button>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -61,7 +61,7 @@
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button full (click)="itemClicked(item, $event)" [class.active]="item" ion-button small>{{item.awayTeamName}}</button>
+          <button full (click)="itemClicked(item, $event)" [class.active]="item === itemclass" ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
       </ion-row>
     </ion-item>

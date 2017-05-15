@@ -35,7 +35,7 @@ export class ItemToto {
   }
 
    itemClicked(item, event) {
-     debugger;
+
      this.itemclass = item;
      console.log(this.itemclass);
      //if (this.highlightedDiv === newValue) {
