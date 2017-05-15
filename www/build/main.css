@@ -24668,7 +24668,10 @@ ion-navbar.toolbar {
 
 page-itemToto .dark {
   background-color: green !important;
-  color: #ffffff;
+}
+
+page-itemToto .active {
+  background-color: red;
 }
 
 page-login .login {

@@ -21,8 +21,10 @@ export class ItemToto {
   loading: any;
   item;
   highlightedDiv: number;
+  itemclass : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
+    this.itemclass = '';
      this.item = this.navParams.get('item');
      console.log(this.item );
      this.items = af.database.list('/data/' + this.item.linked + '/' + this.item.linkedId)
@@ -32,13 +34,16 @@ export class ItemToto {
     console.log('ionViewDidLoad Item');
   }
 
-   itemClicked(newValue: number) {
-      if (this.highlightedDiv === newValue) {
-        this.highlightedDiv = 0;
-      }
-      else {
-        this.highlightedDiv = newValue;
-      }
+   itemClicked(item, event) {
+     debugger;
+     this.itemclass = item;
+     console.log(this.itemclass);
+     //if (this.highlightedDiv === newValue) {
+     //  this.highlightedDiv = 0;
+     // }
+      //lse {
+     //   this.highlightedDiv = newValue;
+     // }
     }
 
     doRefresh(refresher) {
