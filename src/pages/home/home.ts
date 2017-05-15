@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Login } from '../login/login';
-import { Item } from '../item/item';
+import { ItemToto } from '../itemToto/itemToto';
 import { Subscription } from 'rxjs/Subscription';
 import { LoadingController } from 'ionic-angular';
 
@@ -50,9 +50,12 @@ export class HomePage {
 
   }
 
- goToItem()
+ goToItemToto(item: any)
   {
-    this.navCtrl.setRoot(Item)
+     this.navCtrl.push(ItemToto, {
+       item: item
+     });
+
   }
 
   signInWithFacebook(): void {

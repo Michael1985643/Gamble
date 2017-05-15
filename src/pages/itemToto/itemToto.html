@@ -1,0 +1,67 @@
+<!--
+  Generated template for the Item page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>itemToto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--<ion-list>
+    <ion-item class="text" *ngFor="let item of items | async">
+        <ion-icon name="logo-twitter" item-left></ion-icon>
+          Followers
+          <ion-badge item-right>260k</ion-badge>
+      {{item.$key}}
+    </ion-item>
+  </ion-list>
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">A</ion-item-divider>
+    <ion-item class="text" *ngFor="let item of items | async">
+        <ion-thumbnail item-left>
+          <img src="https://upload.wikimedia.org/wikipedia/de/2/28/PEC_Zwolle_2012.svg">
+        </ion-thumbnail> 
+        <h2>
+          <button ion-button item-left large>{{item.homeTeamName}}</button>
+        </h2>    
+        <ion-thumbnail item-left>
+          <img src="https://upload.wikimedia.org/wikipedia/de/2/28/PEC_Zwolle_2012.svg">
+        </ion-thumbnail> 
+        <h2>
+          <button ion-button item-left large>{{item.homeTeamName}}</button>
+        </h2>  
+    </ion-item>
+  </ion-item-group>-->
+  <ion-grid>
+    <ion-item class="text" *ngFor="let item of items | async">
+      <ion-row>
+        <ion-col>
+            <ion-thumbnail item-left>
+              <img src="{{item.homeTeamNameCrestUrl}}">
+            </ion-thumbnail> 
+        </ion-col>
+        <ion-col>
+          <button ion-button item-left large>{{item.homeTeamName}}</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-thumbnail item-left>
+              <img src="{{item.awayTeamNameCrestUrl}}">
+            </ion-thumbnail> 
+        </ion-col>
+        <ion-col>
+          <button ion-button item-left large>{{item.awayTeamName}}</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
+</ion-content>
