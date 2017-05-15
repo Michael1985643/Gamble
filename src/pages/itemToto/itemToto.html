@@ -7,13 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>itemToto</ion-title>
+    <ion-title>{{item.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!--<ion-list>
     <ion-item class="text" *ngFor="let item of items | async">
         <ion-icon name="logo-twitter" item-left></ion-icon>
