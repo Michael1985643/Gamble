@@ -24666,6 +24666,11 @@ ion-navbar.toolbar {
   }
 }
 
+page-itemToto .dark {
+  background-color: green !important;
+  color: #ffffff;
+}
+
 page-login .login {
   background: no-repeat center;
   margin: auto;

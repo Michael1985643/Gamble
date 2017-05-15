@@ -43,28 +43,26 @@
         </h2>  
     </ion-item>
   </ion-item-group>-->
-  <ion-grid>
     <ion-item class="text" *ngFor="let item of items | async">
-      <ion-row>
-        <ion-col>
-            <ion-thumbnail item-left>
+      <ion-row (click)="itemClicked(1)" [ngClass]="{'dark': highlightedDiv === 1 }">
+        <ion-col col-4>
+            <ion-thumbnail>
               <img src="{{item.homeTeamNameCrestUrl}}">
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button ion-button item-left large>{{item.homeTeamName}}</button>
+          <button ion-button small>{{item.homeTeamName}}</button>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-            <ion-thumbnail item-left>
+        <ion-col col-4>
+            <ion-thumbnail>
               <img src="{{item.awayTeamNameCrestUrl}}">
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button ion-button item-left large>{{item.awayTeamName}}</button>
+          <button ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
       </ion-row>
     </ion-item>
-  </ion-grid>
 </ion-content>

@@ -20,6 +20,7 @@ export class ItemToto {
   items: FirebaseListObservable<any[]>;
   loading: any;
   item;
+  highlightedDiv: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
      this.item = this.navParams.get('item');
@@ -30,6 +31,15 @@ export class ItemToto {
   ionViewDidLoad() {
     console.log('ionViewDidLoad Item');
   }
+
+   itemClicked(newValue: number) {
+      if (this.highlightedDiv === newValue) {
+        this.highlightedDiv = 0;
+      }
+      else {
+        this.highlightedDiv = newValue;
+      }
+    }
 
     doRefresh(refresher) {
     console.log('Begin async operation', refresher);
