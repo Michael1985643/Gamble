@@ -8,7 +8,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<ion-tabs  tabbarPlacement="top"  primary>
+    <ion-tab tabIcon="card" tabTitle="Questions" [root]="tab1" [(rootParams)]="cardSetId"></ion-tab>
+    <ion-tab tabIcon="stats" tabTitle="Statistics" [root]="tab2" [rootParams]="cardSetId"></ion-tab>
+    <ion-tab tabIcon="settings" tabTitle="Settings" [root]="tab3" [rootParams]="cardSetId"></ion-tab>
+</ion-tabs>
 <ion-content padding>
   <ion-list>
     <ion-item class="text" *ngFor="let item of items | async">

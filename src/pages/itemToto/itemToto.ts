@@ -37,8 +37,14 @@ export class ItemToto {
     console.log('ionViewDidLoad Item');
   }
 
-   itemClicked(item) {
-      this.selectedItem = item;
+   itemClicked(item, teamName, event) {
+     if (teamName == item.selectedItem) {
+       item.selectedItem = "";
+     }
+     else 
+     {
+      item.selectedItem = teamName;
+     }
     }
 
     doRefresh(refresher) {
