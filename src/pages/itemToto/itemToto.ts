@@ -17,43 +17,84 @@ import { LoadingController } from 'ionic-angular';
 })
 export class ItemToto {
 
-  items: FirebaseListObservable<any[]>;
+  items = [];
   loading: any;
   item;
-  highlightedDiv: number;
-  itemclass : string;
-  test;
   selectedItem;
+  user;
+  af;
+  value;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
-    this.itemclass = '';
-     this.test = "";
+     this.af = af;
+     this.user = _auth.auth$.getAuth().auth;
      this.item = this.navParams.get('item');
-     console.log(this.item );
+
+     /*
      this.items = af.database.list('/data/' + this.item.linked + '/' + this.item.linkedId)
+
+       this.items.forEach(itemArray => {
+        for(var i = 0; i < itemArray.length; i++){
+          const wobj = itemArray[i];
+          const uid = this.user.uid;
+          const wid = parseInt(itemArray[i].id);
+          var playerRes = this.item.players[uid];
+          wobj.selectedItem = playerRes[wid];
+            
+          console.log(playerRes[wid]);
+        }
+      });    
+      */
+
+      af.database.list('/data/' + this.item.linked + '/' + this.item.linkedId).forEach(itemArray => {
+        for(var i = 0; i < itemArray.length; i++){
+          const wobj = itemArray[i];
+          const uid = this.user.uid;
+          const wid = parseInt(itemArray[i].id);
+          if (this.item.players)
+          {
+            if (this.item.players[uid]) {
+              var playerRes = this.item.players[uid];
+              wobj.selectedItem = playerRes[wid];
+              this.items.push(wobj);
+              console.log(playerRes[wid]);
+            }
+          }
+          else {
+            this.items.push(wobj);
+          }
+        }
+      });   
+
+  }
+/*
+  ionViewWillEnter() {
+      this.items.forEach(itemArray => {
+        for(var i = 0; i < itemArray.length; i++){
+          const wobj = itemArray[i];
+          const uid = this.user.uid;
+          const wid = parseInt(itemArray[i].id);
+          var playerRes = this.item.players[uid];
+          wobj.selectedItem = playerRes[wid];
+            
+          console.log(playerRes[wid]);
+        }
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Item');
-  }
+*/
 
-   itemClicked(item, teamName, event) {
-     if (teamName == item.selectedItem) {
-       item.selectedItem = "";
-     }
-     else 
-     {
-      item.selectedItem = teamName;
-     }
+  itemClicked(item, teamName, event) {
+    if (teamName == item.selectedItem) {
+        item.selectedItem = "";
+        const value = this.af.database.object('dnb/gambles/' + this.item.$key + '/players/' +this.user.uid + '/' + item.id);
+        value.remove()
     }
-
-    doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
+    else 
+    {
+        item.selectedItem = teamName;
+        const items = this.af.database.object('dnb/gambles/' + this.item.$key + '/players/' +this.user.uid + '/' + item.id);
+        items.set(teamName);
+    }
   }
-
 }

@@ -18,9 +18,9 @@ import { HomePage } from '../home/home';
 export class Login {
 
   items: FirebaseListObservable<any[]>;
-  
+  af;
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService) {
-    //this.items = af.database.list('/items');
+    this.af = af;
   }
 
   signInWithFacebook(): void {
@@ -39,7 +39,19 @@ export class Login {
 
   private onSignInSuccess(): void {
     console.log("Display name ",this._auth.displayName());
+     this.af.database.list('/items');
      this.navCtrl.push(HomePage);
+     const userObj = this._auth.auth$.getAuth().auth;
+     const user = {
+       email :  userObj.email,
+       displayName : userObj.displayName,
+       photoURL: userObj.photoURL,
+       uid: userObj.uid
+     }
+     const setUser = this.af.database.object('users/' + userObj.uid + '/');
+     setUser.set(user);
+
+
   }
 
 }
