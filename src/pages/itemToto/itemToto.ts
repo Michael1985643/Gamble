@@ -67,33 +67,17 @@ export class ItemToto {
       });   
 
   }
-/*
-  ionViewWillEnter() {
-      this.items.forEach(itemArray => {
-        for(var i = 0; i < itemArray.length; i++){
-          const wobj = itemArray[i];
-          const uid = this.user.uid;
-          const wid = parseInt(itemArray[i].id);
-          var playerRes = this.item.players[uid];
-          wobj.selectedItem = playerRes[wid];
-            
-          console.log(playerRes[wid]);
-        }
-      });
-  }
-
-*/
 
   itemClicked(item, teamName, event) {
     if (teamName == item.selectedItem) {
         item.selectedItem = "";
-        const value = this.af.database.object('dnb/gambles/' + this.item.$key + '/players/' +this.user.uid + '/' + item.id);
+        const value = this.af.database.object('dnb/players/' + this.user.uid + '/' + this.item.$key + '/' + item.id);
         value.remove()
     }
     else 
     {
         item.selectedItem = teamName;
-        const items = this.af.database.object('dnb/gambles/' + this.item.$key + '/players/' +this.user.uid + '/' + item.id);
+        const items = this.af.database.object('dnb/players/' + this.user.uid + '/' + this.item.$key + '/' + item.id);
         items.set(teamName);
     }
   }
