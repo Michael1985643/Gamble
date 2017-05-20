@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
+import moment from 'moment';
 
 /**
  * Generated class for the Item page.
@@ -29,23 +30,9 @@ export class ItemToto {
      this.af = af;
      this.user = _auth.auth$.getAuth().auth;
      this.item = this.navParams.get('item');
-
-     /*
-     this.items = af.database.list('/data/' + this.item.linked + '/' + this.item.linkedId)
-
-       this.items.forEach(itemArray => {
-        for(var i = 0; i < itemArray.length; i++){
-          const wobj = itemArray[i];
-          const uid = this.user.uid;
-          const wid = parseInt(itemArray[i].id);
-          var playerRes = this.item.players[uid];
-          wobj.selectedItem = playerRes[wid];
-            
-          console.log(playerRes[wid]);
-        }
-      });    
-      */
-
+let data = moment().format('YYYYMMDD');
+let time = moment().format('HHmmss');
+console.log('today is: ', data + ' and time: ', time);
       af.database.list('/data/' + this.item.linked + '/' + this.item.linkedId).forEach(itemArray => {
         for(var i = 0; i < itemArray.length; i++){
           const wobj = itemArray[i];
