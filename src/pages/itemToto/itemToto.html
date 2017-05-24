@@ -17,32 +17,6 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <!--<ion-list>
-    <ion-item class="text" *ngFor="let item of items | async">
-        <ion-icon name="logo-twitter" item-left></ion-icon>
-          Followers
-          <ion-badge item-right>260k</ion-badge>
-      {{item.$key}}
-    </ion-item>
-  </ion-list>
-<ion-content>
-  <ion-item-group>
-    <ion-item-divider color="light">A</ion-item-divider>
-    <ion-item class="text" *ngFor="let item of items | async">
-        <ion-thumbnail item-left>
-          <img src="https://upload.wikimedia.org/wikipedia/de/2/28/PEC_Zwolle_2012.svg">
-        </ion-thumbnail> 
-        <h2>
-          <button ion-button item-left large>{{item.homeTeamName}}</button>
-        </h2>    
-        <ion-thumbnail item-left>
-          <img src="https://upload.wikimedia.org/wikipedia/de/2/28/PEC_Zwolle_2012.svg">
-        </ion-thumbnail> 
-        <h2>
-          <button ion-button item-left large>{{item.homeTeamName}}</button>
-        </h2>  
-    </ion-item>
-  </ion-item-group>-->
     <ion-item class="text" *ngFor="let item of items">
       <ion-row>
         <ion-col col-4>

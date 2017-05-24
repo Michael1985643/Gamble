@@ -1,3 +1,4 @@
+import {Pipe, PipeTransform} from '@angular/core';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -5,8 +6,18 @@ import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Login } from '../login/login';
 import { ItemToto } from '../itemToto/itemToto';
-import { Subscription } from 'rxjs/Subscription';
 import { LoadingController } from 'ionic-angular';
+import moment from 'moment';
+
+@Pipe({
+    name: 'momentPipe'
+})
+export class MomentPipe implements PipeTransform {
+transform(date, format) {
+    return moment(date).format(format);
+}
+}
+
 
 @Component({
   selector: 'page-home',
@@ -15,7 +26,6 @@ import { LoadingController } from 'ionic-angular';
 export class HomePage {
 
   items: FirebaseListObservable<any[]>;
-  subscription: Subscription;
   loading: any;
   gambleOpen: boolean = true;
   herous: [any];
@@ -31,8 +41,6 @@ export class HomePage {
           this.loading.dismiss();
         }
      });
-     
-     this.herous = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
       //this.items.subscribe(items => {
     // items is an array
    // items.forEach(item => {

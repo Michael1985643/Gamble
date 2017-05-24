@@ -31,7 +31,7 @@
 
       <ion-item>
         <ion-icon name='close' item-left style="color: #55acee"></ion-icon>
-        {{item.closedForGamble}}
+        {{item.closedForGamble | amDateFormat:'dddd DD-MM-YYYY hh:mm:ss'}}
         <ion-icon *ngIf=gambleOpen name='ios-checkmark-circle-outline' item-right style="color: #7CBD26"></ion-icon>
       </ion-item>
 

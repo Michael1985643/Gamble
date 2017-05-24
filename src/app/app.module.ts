@@ -12,6 +12,8 @@ import { Login } from '../pages/login/login';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/auth-service';
 
+import {MomentModule} from 'angular2-moment';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyBX6jLr_Hr0s_5ig3pSYbzU3bhf6Iy0Kxg",
   authDomain: "gamble-69341.firebaseapp.com",
@@ -30,7 +32,8 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
