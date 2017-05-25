@@ -25,7 +25,7 @@
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
+          <button color="light" full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -35,7 +35,7 @@
             </ion-thumbnail> 
         </ion-col>
         <ion-col>
-          <button full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
+          <button color="light" full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
       </ion-row>
     </ion-item>
