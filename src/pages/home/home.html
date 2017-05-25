@@ -7,15 +7,22 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="open" (click)="showOpenItems()">
+        Open
+      </ion-segment-button>
+      <ion-segment-button value="closed" (click)="showClosedItems()">
+        Closed
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
-<ion-tabs  tabbarPlacement="top"  primary>
-    <ion-tab tabIcon="card" tabTitle="Questions" [root]="tab1" [(rootParams)]="cardSetId"></ion-tab>
-    <ion-tab tabIcon="stats" tabTitle="Statistics" [root]="tab2" [rootParams]="cardSetId"></ion-tab>
-    <ion-tab tabIcon="settings" tabTitle="Settings" [root]="tab3" [rootParams]="cardSetId"></ion-tab>
-</ion-tabs>
+
+
 <ion-content padding>
   <ion-list>
-    <ion-item class="text" *ngFor="let item of items | async">
+    <ion-item class="text" *ngFor="let item of items">
       <ion-card type="button" (click)="goToItemToto(item)">
       <img src="../../assets/images/badgeheader.jpg" width="75" />
       <ion-card-content>
@@ -31,8 +38,9 @@
 
       <ion-item>
         <ion-icon name='close' item-left style="color: #55acee"></ion-icon>
-        {{item.closedForGamble | amDateFormat:'dddd DD-MM-YYYY hh:mm:ss'}}
-        <ion-icon *ngIf=gambleOpen name='ios-checkmark-circle-outline' item-right style="color: #7CBD26"></ion-icon>
+        {{item.closedForGamble | amDateFormat:'DD-MM-YYYY HH:mm:ss'}}
+        <ion-icon *ngIf="currentDate > item.closedForGamble" name='close-circle' item-right style="color: #BD2630"></ion-icon>
+        <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
       </ion-item>
 
       </ion-card>

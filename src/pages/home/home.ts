@@ -1,4 +1,3 @@
-import {Pipe, PipeTransform} from '@angular/core';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -9,53 +8,56 @@ import { ItemToto } from '../itemToto/itemToto';
 import { LoadingController } from 'ionic-angular';
 import moment from 'moment';
 
-@Pipe({
-    name: 'momentPipe'
-})
-export class MomentPipe implements PipeTransform {
-transform(date, format) {
-    return moment(date).format(format);
-}
-}
-
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  items: FirebaseListObservable<any[]>;
+  allItems: any[];
+  items = [];
   loading: any;
   gambleOpen: boolean = true;
-  herous: [any];
+  currentDate;
+  pet: string = "open";
 
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
      this.loading = this.loadingCtrl.create({
             content: "Please wait...",
         });
      this.loading.present();
-     this.items = af.database.list('/dnb/gambles')
-     this.items.subscribe(items => {
-        if (items) {
+      af.database.list('/dnb/gambles').subscribe(result => {
+        this.allItems = result;
+        result.forEach(element => {
+          if (moment() < moment(element.closedForGamble)) {
+            console.log(element)
+            this.items.push(element);
+          }
+        });
+        if (result) {
           this.loading.dismiss();
         }
      });
-      //this.items.subscribe(items => {
-    // items is an array
-   // items.forEach(item => {
-   //     console.log('Item:', item);
-   // });
-  //  this.items.subscribe((x) => alert('Reactive Firebase Working!'));
-       //const promise = af.database.object('/gambles').remove();
-    //promise
-    //  .then(_ => console.log('success'))
-     // .catch(err => console.log(err, 'You dont have access!'));
-//});
+    this.currentDate = moment().format('x');
+
   }
 
-  isGambleOpen() {
+  showOpenItems () {
+    this.items.length = 0;
+    this.allItems.forEach(element => {
+      if (moment() < moment(element.closedForGamble)) {
+        this.items.push(element);  
+      }
+    });
+  }
 
+  showClosedItems () {
+    this.items.length = 0;
+    this.allItems.forEach(element => {
+      if (moment() > moment(element.closedForGamble)) {
+        this.items.push(element);  
+      }
+    });   
   }
 
  goToItemToto(item: any)
