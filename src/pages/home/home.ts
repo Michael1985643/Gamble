@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { AuthService } from '../../providers/auth-service';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { Login } from '../login/login';
 import { ItemToto } from '../itemToto/itemToto';
 import { LoadingController } from 'ionic-angular';
@@ -14,12 +14,12 @@ import moment from 'moment';
 })
 export class HomePage {
 
-  allItems: any[];
+  allItems= [];
   items = [];
   loading: any;
   gambleOpen: boolean = true;
   currentDate;
-  pet: string = "open";
+  gambleSelect: string = "mygambles";
 
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
      this.loading = this.loadingCtrl.create({
@@ -27,12 +27,12 @@ export class HomePage {
         });
      this.loading.present();
       af.database.list('/dnb/gambles').subscribe(result => {
-        this.allItems = result;
+        this.items.length = 0;
+        this.allItems.length = 0;
         result.forEach(element => {
-          if (moment() < moment(element.closedForGamble)) {
-            console.log(element)
-            this.items.push(element);
-          }
+          //debugger;
+          this.items.push(element);
+          this.allItems.push(element);
         });
         if (result) {
           this.loading.dismiss();
@@ -42,22 +42,20 @@ export class HomePage {
 
   }
 
-  showOpenItems () {
+  showMyGambles () {
     this.items.length = 0;
-    this.allItems.forEach(element => {
-      if (moment() < moment(element.closedForGamble)) {
+     this.allItems.forEach(element => {
         this.items.push(element);  
-      }
-    });
+     });   
   }
 
-  showClosedItems () {
-    this.items.length = 0;
-    this.allItems.forEach(element => {
-      if (moment() > moment(element.closedForGamble)) {
-        this.items.push(element);  
-      }
-    });   
+  showStats () {
+     this.items.length = 0;
+     this.allItems.forEach(element => {
+       if (moment() > moment(element.closedForGamble)) {
+         this.items.push(element);  
+       }
+     });   
   }
 
  goToItemToto(item: any)
@@ -68,10 +66,10 @@ export class HomePage {
 
   }
 
-  signInWithFacebook(): void {
-    this._auth.signInWithFacebook()
-      .then(() => this.onSignInSuccess());
-  }
+  // signInWithFacebook(): void {
+  //   this._auth.signInWithFacebook()
+  //     .then(() => this.onSignInSuccess());
+  // }
 
   logOut(af: AngularFire): void {
     this._auth.signOut()
@@ -80,8 +78,8 @@ export class HomePage {
       })
   }
 
-  private onSignInSuccess(): void {
-    console.log("Facebook display name ",this._auth.displayName());
-  }
+  // private onSignInSuccess(): void {
+  //   console.log("Facebook display name ",this._auth.displayName());
+  // }
 
 }

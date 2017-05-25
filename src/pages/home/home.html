@@ -8,12 +8,12 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="pet" color="light">
-      <ion-segment-button value="open" (click)="showOpenItems()">
-        Open
+    <ion-segment [(ngModel)]="gambleSelect" color="light">
+      <ion-segment-button value="mygambles" (click)="showMyGambles()">
+        My Gambles
       </ion-segment-button>
-      <ion-segment-button value="closed" (click)="showClosedItems()">
-        Closed
+      <ion-segment-button value="stats" (click)="showStats()">
+        Stats
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -21,6 +21,9 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-item class="text" *ngFor="let item of items" (click)="goToItemToto(item)">
       <!--

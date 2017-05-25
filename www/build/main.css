@@ -24672,6 +24672,7 @@ page-itemToto .dark {
 
 page-itemToto .active {
   background-color: green;
+  color: white;
 }
 
 page-login .login {
