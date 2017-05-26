@@ -23,8 +23,16 @@ export class HomePage {
   gambleOpen: boolean = true;
   currentDate;
   gambleSelect: string = "mygambles";
+  af;
+  role: string;
 
   constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
+    this.af = af;
+    const getRole = af.database.object('/dnb/roles/' + _auth.auth$.getAuth().uid).subscribe(result => {
+      this._auth.auth$.getAuth().auth["role"] = result.$value;
+      this.role = result.$value
+    })
+
      this.loading = this.loadingCtrl.create({
             content: "Please wait...",
         });
@@ -84,6 +92,10 @@ export class HomePage {
     this.navCtrl.push(AddToto, {
        item: item
      });
+  }
+
+  removeItem(item: any) {
+    this.af.database.object('/dnb/gambles/' + item.$key).remove();
   }
   // signInWithFacebook(): void {
   //   this._auth.signInWithFacebook()

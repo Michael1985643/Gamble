@@ -22,30 +22,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item class="text" *ngFor="let item of items" (click)="goToItem(item)">
-      <!--
-      <ion-card type="button" (click)="goToItemToto(item)">
-      <img src="../../assets/images/badgeheader.jpg" width="75" />
-      <ion-card-content>
-        <ion-card-title>
-           {{item.name}}
-        </ion-card-title>
-      </ion-card-content>
-
-      <ion-item>
-        <ion-icon name='calendar' item-left style="color: #BD2630"></ion-icon>
-        {{item.startdatum}}
-      </ion-item>
-
-      <ion-item>
-        <ion-icon name='close' item-left style="color: #55acee"></ion-icon>
-        {{item.closedForGamble | amDateFormat:'DD-MM-YYYY HH:mm:ss'}}
-        <ion-icon *ngIf="currentDate > item.closedForGamble" name='close-circle' item-right style="color: #BD2630"></ion-icon>
-        <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
-      </ion-item>
-
-      </ion-card>/-->
-
+    <ion-item (press)="removeItem(item)" class="text" *ngFor="let item of items" (click)="goToItem(item)">
       <ion-avatar item-left>
         <img *ngIf="item.type=='toto'" src="../../assets/images/football-icon.png">
         <img *ngIf="item.type=='special'" src="../../assets/images/write-document-icon.png">
@@ -57,7 +34,7 @@
       <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
     </ion-item>
   </ion-list>
-    <ion-fab right bottom>
+    <ion-fab right bottom *ngIf="role == 'admin'" >
     <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab (click)="addToto(item)"><img src="../../assets/images/football-icon.png"></button>

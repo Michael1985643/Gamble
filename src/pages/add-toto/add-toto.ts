@@ -22,6 +22,8 @@ export class AddToto {
   wedstrijden = [];
   af;
   loading: any;
+  name: string;
+  item;
 
   constructor(
     public navCtrl: NavController, 
@@ -31,6 +33,7 @@ export class AddToto {
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController) {
 
+     this.af = af;
      this.loading = this.loadingCtrl.create({
             content: "Please wait...",
      });
@@ -42,6 +45,7 @@ export class AddToto {
             this.wedstrijden.push(element)
           });
           this.loading.dismiss();
+          console.log(this.wedstrijden[0])
       })
   }
 
@@ -49,9 +53,13 @@ export class AddToto {
     console.log('ionViewDidLoad AddToto');
   }
 
-  presentModal() {
-    let modal = this.modalCtrl.create(ItemToto);
-    modal.present();
+  addClicked() {
+    const items = this.af.database.object('dnb/gambles/' + this.name);
+    let item = {  
+        id: this.name,
+        type: "toto"
+    }
+    items.set(item);
   }
 
 }

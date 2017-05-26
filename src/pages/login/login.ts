@@ -38,9 +38,6 @@ export class Login {
   }
 
   private onSignInSuccess(): void {
-    console.log("Display name ",this._auth.displayName());
-     this.af.database.list('/items');
-     this.navCtrl.push(HomePage);
      const userObj = this._auth.auth$.getAuth().auth;
      const user = {
        email :  userObj.email,
@@ -50,8 +47,12 @@ export class Login {
      }
      const setUser = this.af.database.object('users/' + userObj.uid + '/');
      setUser.set(user);
-
-
+     const getRole = this.af.database.object('/dnb/roles/' + userObj.uid).subscribe(result => {
+        this._auth.auth$.getAuth().auth["role"] = result.$value
+        this.navCtrl.push(HomePage);
+        getRole.unsubscribe();
+     })
+     
   }
 
 }

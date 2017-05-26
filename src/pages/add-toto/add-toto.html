@@ -14,7 +14,11 @@
   <ion-list>
     <ion-item>
       <ion-label fixed>Name</ion-label>
-      <ion-input type="text" value="" required></ion-input>
+      <ion-input type="text" value="" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Display Name</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="displayname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Start Date:</ion-label>
@@ -33,13 +37,17 @@
       <ion-toggle checked="false"></ion-toggle>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Linked Wedstrijden ID</ion-label>
+        <ion-label fixed>Wedstrijd linkedid:</ion-label>
         <ion-select>
-            <ion-option (click)="presentModal()" *ngFor="let wedstrijd of wedstrijden; let i = index">{{i + 1}}<button ion-button>Default</button></ion-option>
+            <ion-option  [value]="wedstrijd.id" *ngFor="let wedstrijd of wedstrijden; let i = index">
+              {{i + 1}} 
+              ({{wedstrijd[0]["homeTeamName"] | slice:0:5}} - 
+              {{wedstrijd[0]["awayTeamName"] | slice:0:5}})
+            </ion-option>
         </ion-select>
     </ion-item>
     <div padding>
-      <button ion-button color="secondary" full  (click)="signInWithGoogle()">Add</button>
+      <button ion-button color="secondary" full  (click)="addClicked()">Add</button>
     </div>
   </ion-list>
 </ion-content>
