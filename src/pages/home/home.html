@@ -21,11 +21,8 @@
 
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-list>
-    <ion-item class="text" *ngFor="let item of items" (click)="goToItemToto(item)">
+    <ion-item class="text" *ngFor="let item of items" (click)="goToItem(item)">
       <!--
       <ion-card type="button" (click)="goToItemToto(item)">
       <img src="../../assets/images/badgeheader.jpg" width="75" />
@@ -60,4 +57,11 @@
       <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
     </ion-item>
   </ion-list>
+    <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="addToto(item)"><img src="../../assets/images/football-icon.png"></button>
+      <button ion-fab (click)="addSpecial(item)"><img src="../../assets/images/write-document-icon.png"></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

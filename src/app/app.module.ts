@@ -7,6 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ItemToto } from '../pages/itemToto/itemToto';
+import { AddToto } from '../pages/add-toto/add-toto';
+import { ItemSpecial } from '../pages/item-special/item-special';
+import { AddSpecial } from '../pages/add-special/add-special';
 import { Login } from '../pages/login/login';
 
 import { AngularFireModule } from 'angularfire2';
@@ -27,7 +30,10 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     Login,
-    ItemToto
+    ItemToto,
+    ItemSpecial,
+    AddToto,
+    AddSpecial
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,10 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     Login,
-    ItemToto
+    ItemToto,
+    ItemSpecial,
+    AddToto,
+    AddSpecial
   ],
   providers: [
     AuthService,

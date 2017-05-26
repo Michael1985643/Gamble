@@ -5,6 +5,9 @@ import { AuthService } from '../../providers/auth-service';
 import { AngularFire } from 'angularfire2';
 import { Login } from '../login/login';
 import { ItemToto } from '../itemToto/itemToto';
+import { AddToto } from '../add-toto/add-toto';
+import { ItemSpecial } from '../item-special/item-special';
+import { AddSpecial } from '../add-special/add-special';
 import { LoadingController } from 'ionic-angular';
 import moment from 'moment';
 
@@ -30,7 +33,6 @@ export class HomePage {
         this.items.length = 0;
         this.allItems.length = 0;
         result.forEach(element => {
-          //debugger;
           this.items.push(element);
           this.allItems.push(element);
         });
@@ -58,14 +60,31 @@ export class HomePage {
      });   
   }
 
- goToItemToto(item: any)
+ goToItem(item: any)
   {
+    if (item.type=="toto") {
      this.navCtrl.push(ItemToto, {
        item: item
      });
-
+    } 
+    if (item.type=="special") {
+     this.navCtrl.push(ItemSpecial, {
+       item: item
+     });
+    } 
   }
 
+  addSpecial (item: any) {
+    this.navCtrl.push(AddSpecial, {
+       item: item
+     });
+  }
+
+  addToto (item: any) {
+    this.navCtrl.push(AddToto, {
+       item: item
+     });
+  }
   // signInWithFacebook(): void {
   //   this._auth.signInWithFacebook()
   //     .then(() => this.onSignInSuccess());

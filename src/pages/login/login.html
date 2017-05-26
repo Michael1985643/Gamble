@@ -1,13 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title class="Center">
-      Gamle Login
+      Gamble Login
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content text-center >
+  <ion-grid class="vertical-align-content">
   <ion-img class="login" width="160" height="160" src="../../assets/images/ball.png"></ion-img>
   <!--<button ion-button color="blue" full (click)="signInWithFacebook()">Login met Facebook</button>-->
-  <button ion-button color="danger" full  (click)="signInWithGoogle()">Login met Google</button>
+  <button ion-button color="secondary" full  (click)="signInWithGoogle()">Login met Google</button>
+  </ion-grid>
 </ion-content>

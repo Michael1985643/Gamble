@@ -4,4 +4,10 @@ page-login {
         margin: auto;
         display: block;
     }
+
+.vertical-align-content > *
+{
+     display: flex!important;
+     margin-top: 100px !important;
+}
 }
