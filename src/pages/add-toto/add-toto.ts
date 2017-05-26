@@ -4,7 +4,9 @@ import { AuthService } from '../../providers/auth-service';
 import { AngularFire } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
-import { ItemToto } from '../itemToto/itemToto';
+import { HomePage } from '../home/home';
+import moment from 'moment';
+
 
 /**
  * Generated class for the AddToto page.
@@ -22,7 +24,12 @@ export class AddToto {
   wedstrijden = [];
   af;
   loading: any;
+  id: string;
   name: string;
+  startDate;
+  endDate;
+  closedForGamble;
+  linkedId;
   item;
 
   constructor(
@@ -49,17 +56,20 @@ export class AddToto {
       })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddToto');
-  }
-
   addClicked() {
-    const items = this.af.database.object('dnb/gambles/' + this.name);
+    const items = this.af.database.object('dnb/gambles/' + this.id);
     let item = {  
-        id: this.name,
+        id: this.id,
+        name: this.name,
+        closedForGamble: moment(this.closedForGamble).unix()*1000,
+        startDate: moment(this.startDate).unix()*1000,
+        endDate: moment(this.endDate).unix()*1000,
+        linked: "wedstrijden",
+        linkedId: this.linkedId,
         type: "toto"
     }
     items.set(item);
+    this.navCtrl.push(HomePage);    
   }
 
 }

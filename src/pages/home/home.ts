@@ -9,6 +9,7 @@ import { AddToto } from '../add-toto/add-toto';
 import { ItemSpecial } from '../item-special/item-special';
 import { AddSpecial } from '../add-special/add-special';
 import { LoadingController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import moment from 'moment';
 
 @Component({
@@ -26,7 +27,7 @@ export class HomePage {
   af;
   role: string;
 
-  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
     this.af = af;
     const getRole = af.database.object('/dnb/roles/' + _auth.auth$.getAuth().uid).subscribe(result => {
       this._auth.auth$.getAuth().auth["role"] = result.$value;
@@ -95,12 +96,28 @@ export class HomePage {
   }
 
   removeItem(item: any) {
-    this.af.database.object('/dnb/gambles/' + item.$key).remove();
+    if (this.role === "admin") {
+      let confirm = this.alertCtrl.create({
+      title: 'Delete?',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.af.database.object('/dnb/gambles/' + item.$key).remove();
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+            console.log('No');
+          }
+        }
+      ]
+    });
+    confirm.present();
+    }
   }
-  // signInWithFacebook(): void {
-  //   this._auth.signInWithFacebook()
-  //     .then(() => this.onSignInSuccess());
-  // }
 
   logOut(af: AngularFire): void {
     this._auth.signOut()
@@ -108,9 +125,5 @@ export class HomePage {
           this.navCtrl.push(Login);
       })
   }
-
-  // private onSignInSuccess(): void {
-  //   console.log("Facebook display name ",this._auth.displayName());
-  // }
 
 }
