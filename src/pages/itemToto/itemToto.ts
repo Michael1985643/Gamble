@@ -67,7 +67,7 @@ export class ItemToto {
    else {
     let alert = this.alertCtrl.create({
       title: 'Gamble closed',
-      subTitle: this.item.name + ' was closed on ' + moment(this.item.closedForGamble).format('dddd DD-MM-YYYY hh:mm:ss'),
+      subTitle: this.item.name + ' was closed on ' + moment(this.item.closedForGamble).format('dddd DD-MM-YYYY HH:mm:ss'),
       buttons: ['OK']
     });
     alert.present();

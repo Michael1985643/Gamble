@@ -13,34 +13,34 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label fixed>Name</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="id"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Display Name</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Start Date:</ion-label>
-      <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="startDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>End Date:</ion-label>
-      <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="endDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Closed for Gamble:</ion-label>
-      <ion-datetime displayFormat="DD-MM-YYYY HH:mm" pickerFormat="DD-MM-YYYY HH:mm" [(ngModel)]="closedForGamble"></ion-datetime>
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>Wedstrijd linkedid:</ion-label>
-        <ion-select [(ngModel)]="linkedId">
+        <ion-label stacked>Wedstrijd linkedid:</ion-label>
+        <ion-select [(ngModel)]="linkedId" (ngModelChange)="someEvent($event)">
             <ion-option *ngFor="let wedstrijd of wedstrijden; let i = index" value="{{i + 1}}">
               {{i + 1}} 
               ({{wedstrijd[0]["homeTeamName"] | slice:0:5}} - 
               {{wedstrijd[0]["awayTeamName"] | slice:0:5}})
             </ion-option>
         </ion-select>
+    </ion-item>    
+    <ion-item>
+      <ion-label stacked>Id:</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="id"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Name:</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Start Date:</ion-label>
+      <ion-datetime displayFormat="DD-MM-YYYY HH:mm" pickerFormat="DD-MMM-YYYY HH:mm" [(ngModel)]="startDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>End Date:</ion-label>
+      <ion-datetime displayFormat="DD-MM-YYYY HH:mm" pickerFormat="DD-MMM-YYYY HH:mm" [(ngModel)]="endDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Closed for Gamble:</ion-label>
+      <ion-datetime displayFormat="DD-MM-YYYY HH:mm" pickerFormat="DD-MMM-YYYY HH:mm" [(ngModel)]="closedForGamble"></ion-datetime>
     </ion-item>
     <div padding>
       <button ion-button color="secondary" full  (click)="addClicked()">Add</button>
