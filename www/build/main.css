@@ -24666,6 +24666,19 @@ ion-navbar.toolbar {
   }
 }
 
+page-item-special .vertical-align-content > * {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 15%;
+}
+
 page-itemToto .dark {
   background-color: green !important;
 }

@@ -9,11 +9,11 @@
   </ion-toolbar>
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="gambleSelect" color="light">
-      <ion-segment-button value="mygambles" (click)="showMyGambles()">
-        My Gambles
+      <ion-segment-button value="mygambles" (click)="showMyOpenGambles()">
+        My Open Gambles
       </ion-segment-button>
-      <ion-segment-button value="stats" (click)="showStats()">
-        Stats
+      <ion-segment-button value="stats" (click)="showMyClosedGambles()">
+        My Closed Gambles
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -28,7 +28,7 @@
         <img *ngIf="item.type=='special'" src="../../assets/images/write-document-icon.png">
       </ion-avatar>
       <h2>{{item.name}}</h2>
-      <h3>{{item.startDate | amDateFormat:'ddd DD-MM-YYYY'}} - {{item.endDate | amDateFormat:'ddd DD-MM-YYYY'}}</h3>
+      <h3>{{item.startDate | amDateFormat:'ddd DD-MM-YYYY'}}   {{item.endDate | amDateFormat:'ddd DD-MM-YYYY'}}</h3>
       <p><ion-icon name='close' item-left style="color: #55acee"></ion-icon> {{item.closedForGamble | amDateFormat:'ddd DD-MM-YYYY HH:mm:ss'}}</p>
       <ion-icon *ngIf="currentDate > item.closedForGamble" name='close-circle' item-right style="color: darkgrey"></ion-icon>
       <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>

@@ -29,7 +29,14 @@ export class ItemToto {
   af;
   value;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
+  constructor(
+    public alertCtrl: AlertController, 
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    af: AngularFire,
+    private _auth: AuthService,
+    public loadingCtrl: LoadingController) 
+    {
      this.af = af;
      this.user = _auth.auth$.getAuth().auth;
      this.item = this.navParams.get('item');

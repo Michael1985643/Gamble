@@ -26,7 +26,7 @@ export class HomePage {
   gambleSelect: string = "mygambles";
   af;
   role: string;
-
+  
   constructor(public alertCtrl: AlertController,public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
     this.af = af;
     const getRole = af.database.object('/dnb/roles/' + _auth.auth$.getAuth().uid).subscribe(result => {
@@ -53,14 +53,14 @@ export class HomePage {
 
   }
 
-  showMyGambles () {
+  showMyOpenGambles () {
     this.items.length = 0;
      this.allItems.forEach(element => {
         this.items.push(element);  
      });   
   }
 
-  showStats () {
+  showMyClosedGambles () {
      this.items.length = 0;
      this.allItems.forEach(element => {
        if (moment() > moment(element.closedForGamble)) {

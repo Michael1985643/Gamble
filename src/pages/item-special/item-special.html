@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ItemSpecial page.
+  Generated template for the Item page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,12 +7,39 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Special</ion-title>
+    <ion-title>{{item.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding> 
+    <ion-row>
+      <h3>{{item.home}}</h3>
+    </ion-row>    
+    <ion-row>
+      <ion-col col-4>
+          <ion-thumbnail>
+            <img src="{{item.homeImage}}">
+          </ion-thumbnail> 
+      </ion-col>
+      <ion-col class="vertical-align-content">
+        <div>
+          <ion-input type="number" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color: #7CBD26; max-width:50px"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+          <h3>{{item.away}}</h3>
+          <ion-thumbnail>
+            <img src="{{item.awayImage}}">
+          </ion-thumbnail> 
+      </ion-col>
+      <ion-col class="vertical-align-content">
+        <div>
+          <ion-input type="number" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: #7CBD26; max-width:50px" (ngModelChange)="setSpecial()"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
 </ion-content>
