@@ -6,4 +6,18 @@ page-item-special {
         align-items: center;
         margin-top: 15%;
     }
+    .left > *
+    {
+        margin-left: 25px;
+    }
+
+    input[type="number"] {
+        font-size:30px;
+        font-style: bold;
+    }
+  
+    .flex-col {
+        display: flex;
+        align-items: center;
+    }  
 }

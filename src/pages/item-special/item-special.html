@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-content padding> 
-    <ion-row>
+<ion-content>
+    <ion-row class="left">
       <h3>{{item.home}}</h3>
     </ion-row>    
     <ion-row>
@@ -23,22 +23,30 @@
             <img src="{{item.homeImage}}">
           </ion-thumbnail> 
       </ion-col>
-      <ion-col class="vertical-align-content">
+      <ion-col class="flex-col">
+          <p style="font-size:50px;">{{item.resultHome}}</p>
+      </ion-col>     
+      <ion-col  class="flex-col">
         <div>
-          <ion-input type="number" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color: #7CBD26; max-width:50px"></ion-input>
+          <ion-input type="number" min="0" max="100" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color:green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
     </ion-row>
+    <ion-row class="left">
+      <h3>{{item.away}}</h3>
+    </ion-row>       
     <ion-row>
       <ion-col col-4>
-          <h3>{{item.away}}</h3>
           <ion-thumbnail>
             <img src="{{item.awayImage}}">
           </ion-thumbnail> 
       </ion-col>
-      <ion-col class="vertical-align-content">
+       <ion-col class="flex-col">
+          <p style="font-size:50px;">{{item.resultHome}}</p>
+      </ion-col>          
+      <ion-col class="flex-col">
         <div>
-          <ion-input type="number" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: #7CBD26; max-width:50px" (ngModelChange)="setSpecial()"></ion-input>
+          <ion-input type="number" min="0" max="100" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
     </ion-row>

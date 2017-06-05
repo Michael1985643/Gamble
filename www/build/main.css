@@ -24679,6 +24679,24 @@ page-item-special .vertical-align-content > * {
   margin-top: 15%;
 }
 
+page-item-special .left > * {
+  margin-left: 25px;
+}
+
+page-item-special input[type="number"] {
+  font-size: 30px;
+  font-style: bold;
+}
+
+page-item-special .flex-col {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 page-itemToto .dark {
   background-color: green !important;
 }
