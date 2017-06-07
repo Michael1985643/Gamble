@@ -15,15 +15,15 @@
     <ion-item class="text" *ngFor="let item of items">
       <ion-grid>
         <ion-row>
-          <ion-col align-self-center>
+          <ion-col col-3 align-self-center>
               <ion-thumbnail>
                 <img src="{{item.homeTeamNameCrestUrl}}">
               </ion-thumbnail> 
           </ion-col>
           <ion-col col-1 align-self-center>
-            <p style="font-size:35px;">{{item.goalsHomeTeam}}</p>
+            <h1>{{item.goalsHomeTeam}}</h1>
           </ion-col>           
-          <ion-col col-8 align-self-center>
+          <ion-col col-7 align-self-center>
             <button color="light" full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
           </ion-col>
         <ion-col col-1 align-self-center>
@@ -32,15 +32,15 @@
         </ion-col>    
         </ion-row>
         <ion-row>
-          <ion-col align-self-center>
+          <ion-col col-3 align-self-center>
               <ion-thumbnail>
                 <img src="{{item.awayTeamNameCrestUrl}}">
               </ion-thumbnail> 
           </ion-col>
-        <ion-col col-1 align-self-center>
-            <p style="font-size:35px;">{{item.goalsAwayTeam}}</p>
+        <ion-col align-self-center>
+            <h1>{{item.goalsAwayTeam}}</h1>
         </ion-col>         
-        <ion-col col-8 align-self-center>
+        <ion-col col-7 align-self-center>
             <button color="light" full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
         <ion-col col-1 align-self-center>
