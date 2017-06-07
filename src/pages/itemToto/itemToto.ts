@@ -45,7 +45,7 @@ export class ItemToto {
             const wobj = itemArray[i];
             const wid = parseInt(itemArray[i].id);
     
-            af.database.object('/dnb/players/' + this.user.uid + '/' + this.item.$key + '/' + wid).forEach(playerItem => {  
+            af.database.object('/dnb/players/totos/' + this.item.id + '/' + this.user.uid + '/' + wid).forEach(playerItem => {  
               if (playerItem.$exists() === true) {
                 wobj.selectedItem = playerItem.$value;
               }
@@ -55,17 +55,24 @@ export class ItemToto {
       });   
   }
 
+  isComplete(item) {
+    if (parseInt(item.goalsHomeTeam) >= 0 && parseInt(item.goalsAwayTeam) >= 0) {
+      return true
+    }
+      else { return false }
+  }
+
   itemClicked(item, teamName, event) {
    if (moment() < moment(this.item.closedForGamble)) {
     if (teamName == item.selectedItem) {
         item.selectedItem = "";
-        const value = this.af.database.object('dnb/players/' + this.user.uid + '/' + this.item.$key + '/' + item.id);
+        const value = this.af.database.object('/dnb/players/totos/' + this.item.id + '/' + this.user.uid + '/' + item.id);
         value.remove()
     }
     else 
     {
         item.selectedItem = teamName;
-        const items = this.af.database.object('dnb/players/' + this.user.uid + '/' + this.item.$key + '/' + item.id);
+        const items = this.af.database.object('/dnb/players/totos/' + this.item.id + '/' + this.user.uid + '/' + item.id);
         items.set(teamName);
         //items.set(firebase.database.ServerValue.TIMESTAMP);
         //timestamp = https://www.epochconverter.com/ UTC

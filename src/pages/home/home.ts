@@ -42,8 +42,10 @@ export class HomePage {
         this.items.length = 0;
         this.allItems.length = 0;
         result.forEach(element => {
-          this.items.push(element);
-          this.allItems.push(element);
+          element.forEach(item => {
+            this.items.push(item);
+            this.allItems.push(item);
+          })
         });
         if (result) {
           this.loading.dismiss();
@@ -104,7 +106,7 @@ export class HomePage {
         {
           text: 'Yes',
           handler: () => {
-            this.af.database.object('/dnb/gambles/' + item.$key).remove();
+            this.af.database.object('/dnb/gambles/' + item.type + 's/' + item.id).remove();
           }
         },
         {

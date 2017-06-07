@@ -9,31 +9,45 @@
   <ion-navbar>
     <ion-title>{{item.name}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
     <ion-item class="text" *ngFor="let item of items">
-      <ion-row>
-        <ion-col col-4>
-            <ion-thumbnail>
-              <img src="{{item.homeTeamNameCrestUrl}}">
-            </ion-thumbnail> 
+      <ion-grid>
+        <ion-row>
+          <ion-col align-self-center>
+              <ion-thumbnail>
+                <img src="{{item.homeTeamNameCrestUrl}}">
+              </ion-thumbnail> 
+          </ion-col>
+          <ion-col col-1 align-self-center>
+            <p style="font-size:35px;">{{item.goalsHomeTeam}}</p>
+          </ion-col>           
+          <ion-col col-8 align-self-center>
+            <button color="light" full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
+          </ion-col>
+        <ion-col col-1 align-self-center>
+            <ion-icon *ngIf="isComplete(item) == true && ( (item.selectedItem == item.homeTeamName && item.goalsHomeTeam > item.goalsAwayTeam) || (item.selectedItem == null && item.goalsHomeTeam == item.goalsAwayTeam) )" name='happy' item-right style="color: #7CBD26"></ion-icon>
+            <ion-icon *ngIf="isComplete(item) == true && ( (item.selectedItem == item.homeTeamName && item.goalsHomeTeam < item.goalsAwayTeam) || (item.selectedItem == item.homeTeamName && item.goalsHomeTeam == item.goalsAwayTeam) || (item.selectedItem == null && item.goalsHomeTeam != item.goalsAwayTeam) )" name='sad' item-right style="color:red"></ion-icon>
+        </ion-col>    
+        </ion-row>
+        <ion-row>
+          <ion-col align-self-center>
+              <ion-thumbnail>
+                <img src="{{item.awayTeamNameCrestUrl}}">
+              </ion-thumbnail> 
+          </ion-col>
+        <ion-col col-1 align-self-center>
+            <p style="font-size:35px;">{{item.goalsAwayTeam}}</p>
+        </ion-col>         
+        <ion-col col-8 align-self-center>
+            <button color="light" full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
-        <ion-col>
-          <button color="light" full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-4>
-            <ion-thumbnail>
-              <img src="{{item.awayTeamNameCrestUrl}}">
-            </ion-thumbnail> 
-        </ion-col>
-        <ion-col>
-          <button color="light" full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-col col-1 align-self-center>
+            <ion-icon *ngIf="isComplete(item) == true && ( (item.selectedItem == item.awayTeamName && item.goalsAwayTeam > item.goalsHomeTeam) )" name='happy' item-right style="color: #7CBD26"></ion-icon>
+            <ion-icon *ngIf="isComplete(item) == truel && ( (item.selectedItem == item.awayTeamName && item.goalsAwayTeam < item.goalsHomeTeam) || (item.selectedItem == item.awayTeamName && item.goalsHomeTeam == item.goalsAwayTeam) )" name='sad' item-right style="color:red"></ion-icon>
+        </ion-col>   
+     </ion-row>
+   </ion-grid>
+ </ion-item>
 </ion-content>

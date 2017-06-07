@@ -76,7 +76,7 @@ export class AddSpecial {
     this.closedForGamble = (typeof this.closedForGamble) == "object" ? moment(this.changeIonicDateTime(this.closedForGamble, 1)).unix()*1000  : moment(this.closedForGamble).unix()*1000;
     this.specialDate = (typeof this.specialDate) == "object" ? moment(this.changeIonicDateTime(this.specialDate, 1)).unix()*1000 : moment(this.specialDate).unix()*1000;
 
-    const items = this.af.database.object('dnb/gambles/' + this.id);
+    const items = this.af.database.object('dnb/gambles/specials/' + this.id);
     let item = {  
         id: this.id,
         name: this.name,

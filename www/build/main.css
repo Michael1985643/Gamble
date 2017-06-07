@@ -24706,6 +24706,10 @@ page-itemToto .active {
   color: white;
 }
 
+page-itemToto ion-icon {
+  font-size: 30px;
+}
+
 page-login .login {
   background: no-repeat center;
   margin: auto;

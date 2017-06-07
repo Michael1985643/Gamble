@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire } from 'angularfire2';
 import { AlertController } from 'ionic-angular';
+import moment from 'moment';
 
 /**
  * Generated class for the ItemSpecial page.
@@ -22,6 +23,8 @@ export class ItemSpecial {
   homeGoals: any;
   awayGoals: any;
   choosenSpecials: any;
+  closedForGamble: any;
+  currentDate;
 
   constructor(
     public navCtrl: NavController, 
@@ -36,6 +39,7 @@ export class ItemSpecial {
      this.af.database.list('/dnb/players/specials/' +  this.item.id).subscribe(result => {
         this.choosenSpecials = result;
      });       
+     this.currentDate = moment().format('x');   
      this.getSpecial();
   }
 

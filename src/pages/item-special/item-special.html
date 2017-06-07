@@ -28,7 +28,7 @@
       </ion-col>     
       <ion-col  class="flex-col">
         <div>
-          <ion-input type="number" min="0" max="100" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color:green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
+          <ion-input [disabled]="currentDate > item.closedForGamble" type="number" min="0" max="100" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color:green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
     </ion-row>
@@ -46,7 +46,7 @@
       </ion-col>          
       <ion-col class="flex-col">
         <div>
-          <ion-input type="number" min="0" max="100" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
+          <ion-input [disabled]="currentDate > item.closedForGamble" type="number" min="0" max="100" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
     </ion-row>

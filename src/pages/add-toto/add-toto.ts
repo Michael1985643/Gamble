@@ -59,7 +59,7 @@ export class AddToto {
     this.startDate = (typeof this.startDate) == "object" ? moment(this.changeIonicDateTime(this.closedForGamble, 1)).unix()*1000 : moment(this.startDate).unix()*1000;
     this.endDate = (typeof this.endDate) == "object" ? moment(this.changeIonicDateTime(this.closedForGamble, 1)).unix()*1000 : moment(this.endDate).unix()*1000;
 
-    const items = this.af.database.object('dnb/gambles/' + this.id);
+    const items = this.af.database.object('dnb/gambles/totos/' + this.id);
     let item = {  
         id: this.id,
         name: this.name,
