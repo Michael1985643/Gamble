@@ -26,7 +26,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item (press)="removeItem(item)" class="text" *ngFor="let item of specials.concat(totos)" (click)="goToItem(item)">
+    <ion-item (press)="removeItem(item)" class="text" *ngFor="let item of specials.concat(totos) | orderBy: order : reverse" (click)="goToItem(item)">
       <ion-avatar item-left>
         <img *ngIf="item.type=='toto'" src="../../assets/images/football-icon.png">
         <img *ngIf="item.type=='special'" src="../../assets/images/write-document-icon.png">

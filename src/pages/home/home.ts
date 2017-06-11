@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire } from 'angularfire2';
 import { Login } from '../login/login';
+import { Overview } from '../overview/overview';
 import { ItemToto } from '../itemToto/itemToto';
 import { AddToto } from '../add-toto/add-toto';
 import { ItemSpecial } from '../item-special/item-special';
@@ -13,7 +14,6 @@ import { AlertController } from 'ionic-angular';
 import moment from 'moment';
 import { Totos } from '../../providers/totos';
 import { Specials } from '../../providers/specials';
-
 
 @Component({
   selector: 'page-home',
@@ -32,6 +32,7 @@ export class HomePage {
   gambleSelect: string = "mygambles";
   af;
   role: string;
+  order: string = 'closedForGamble';
   
   constructor(
     public alertCtrl: AlertController,
@@ -125,4 +126,7 @@ export class HomePage {
       })
   }
 
+  overview()  {
+    this.navCtrl.push(Overview);
+  }
 }

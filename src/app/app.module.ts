@@ -11,11 +11,13 @@ import { AddToto } from '../pages/add-toto/add-toto';
 import { ItemSpecial } from '../pages/item-special/item-special';
 import { AddSpecial } from '../pages/add-special/add-special';
 import { Login } from '../pages/login/login';
+import { Overview } from '../pages/overview/overview';
 
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/auth-service';
 
 import {MomentModule} from 'angular2-moment';
+import {Ng2OrderModule} from 'ng2-order-pipe';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBX6jLr_Hr0s_5ig3pSYbzU3bhf6Iy0Kxg",
@@ -33,13 +35,15 @@ export const firebaseConfig = {
     ItemToto,
     ItemSpecial,
     AddToto,
-    AddSpecial
+    AddSpecial,
+    Overview
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    MomentModule
+    MomentModule,
+    Ng2OrderModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +53,8 @@ export const firebaseConfig = {
     ItemToto,
     ItemSpecial,
     AddToto,
-    AddSpecial
+    AddSpecial,
+    Overview
   ],
   providers: [
     AuthService,

@@ -24697,6 +24697,10 @@ page-item-special .flex-col {
   align-items: center;
 }
 
+page-item-special ion-icon {
+  font-size: 40px;
+}
+
 page-itemToto .dark {
   background-color: green !important;
 }

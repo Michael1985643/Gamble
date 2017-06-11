@@ -31,6 +31,10 @@
           <ion-input [disabled]="currentDate > item.closedForGamble" type="number" min="0" max="100" [(ngModel)]="homeGoals" style="color: white;size: 14;background-color:green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
+      <ion-col col-1 align-self-center *ngIf="currentDate > item.closedForGamble">
+          <ion-icon *ngIf="homeGoals == item.resultHome && awayGoals == item.resultAway" name='happy' item-right style="color: #7CBD26"></ion-icon>
+          <ion-icon *ngIf="homeGoals != item.resultHome || awayGoals != item.resultAway"name='sad' item-right style="color:red"></ion-icon>
+      </ion-col>  
     </ion-row>
     <ion-row class="left">
       <h3>{{item.away}}</h3>
@@ -42,12 +46,14 @@
           </ion-thumbnail> 
       </ion-col>
        <ion-col class="flex-col">
-          <p style="font-size:50px;">{{item.resultHome}}</p>
+          <p style="font-size:50px;">{{item.resultAway}}</p>
       </ion-col>          
       <ion-col class="flex-col">
         <div>
           <ion-input [disabled]="currentDate > item.closedForGamble" type="number" min="0" max="100" [(ngModel)]="awayGoals" style="color: white;size: 14;background-color: green; max-width:75px" (ngModelChange)="setSpecial()"></ion-input>
         </div>
       </ion-col>
+      <ion-col col-1 align-self-center *ngIf="currentDate > item.closedForGamble"> 
+      </ion-col>  
     </ion-row>
 </ion-content>

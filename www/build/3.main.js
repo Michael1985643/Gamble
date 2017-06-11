@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 444:
+/***/ 448:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_special__ = __webpack_require__(116);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSpecialModule", function() { return AddSpecialModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_toto__ = __webpack_require__(117);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddTotoModule", function() { return AddTotoModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddSpecialModule = (function () {
-    function AddSpecialModule() {
+var AddTotoModule = (function () {
+    function AddTotoModule() {
     }
-    return AddSpecialModule;
+    return AddTotoModule;
 }());
-AddSpecialModule = __decorate([
+AddTotoModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */],
+            __WEBPACK_IMPORTED_MODULE_2__add_toto__["a" /* AddToto */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_toto__["a" /* AddToto */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */]
+            __WEBPACK_IMPORTED_MODULE_2__add_toto__["a" /* AddToto */]
         ]
     })
-], AddSpecialModule);
+], AddTotoModule);
 
-//# sourceMappingURL=add-special.module.js.map
+//# sourceMappingURL=add-toto.module.js.map
 
 /***/ })
 
