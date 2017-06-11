@@ -11,15 +11,21 @@ import { AddSpecial } from '../add-special/add-special';
 import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import moment from 'moment';
+import { Totos } from '../../providers/totos';
+import { Specials } from '../../providers/specials';
+
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [Totos, Specials]
 })
 export class HomePage {
 
   allItems= [];
   items = [];
+  totos = [];
+  specials = [];
   loading: any;
   gambleOpen: boolean = true;
   currentDate;
@@ -27,52 +33,39 @@ export class HomePage {
   af;
   role: string;
   
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController,af: AngularFire,private _auth: AuthService,public loadingCtrl: LoadingController) {
-    this.af = af;
-    const getRole = af.database.object('/dnb/roles/' + _auth.auth$.getAuth().uid).subscribe(result => {
-      this._auth.auth$.getAuth().auth["role"] = result.$value;
-      this.role = result.$value
-    })
+  constructor(
+    public alertCtrl: AlertController,
+    public navCtrl: NavController,
+    af: AngularFire,
+    private _auth: AuthService,
+    public loadingCtrl: LoadingController,
+    public Totos: Totos,
+    public Specials: Specials) 
+    {
+      this.af = af;
+      const getRole = af.database.object('/dnb/roles/' + _auth.auth$.getAuth().uid).subscribe(result => {
+        this._auth.auth$.getAuth().auth["role"] = result.$value;
+        this.role = result.$value
+      })
 
-     this.loading = this.loadingCtrl.create({
-            content: "Please wait...",
-        });
-     this.loading.present();
-      af.database.list('/dnb/gambles').subscribe(result => {
-        this.items.length = 0;
-        this.allItems.length = 0;
-        result.forEach(element => {
-          element.forEach(item => {
-            if (moment() < moment(item.closedForGamble)) { //show only open gambles
-              this.items.push(item);
-            }
-            this.allItems.push(item);
-          })
-        });
-        if (result) {
-          this.loading.dismiss();
-        }
-     });
-    this.currentDate = moment().format('x');
-
-  }
+      this.loading = this.loadingCtrl.create({
+              content: "Please wait...",
+      });
+      this.loading.present();
+      this.totos = Totos.getOpenTotos();
+      this.specials = Specials.getOpenSpecials();
+      this.currentDate = moment().format('x');
+      this.loading.dismiss(); 
+    }
 
   showMyOpenGambles () {
-    this.items.length = 0;
-     this.allItems.forEach(element => {
-       if (moment() < moment(element.closedForGamble)) {
-        this.items.push(element);  
-       }
-     });   
+    this.totos = this.Totos.getOpenTotos();
+    this.specials = this.Specials.getOpenSpecials();
   }
 
   showMyClosedGambles () {
-     this.items.length = 0;
-     this.allItems.forEach(element => {
-       if (moment() >= moment(element.closedForGamble)) {
-         this.items.push(element);  
-       }
-     });   
+    this.totos = this.Totos.getClosedTotos();
+    this.specials = this.Specials.getClosedSpecials();
   }
 
  goToItem(item: any)
