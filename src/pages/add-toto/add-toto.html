@@ -42,6 +42,10 @@
       <ion-label stacked>Closed for Gamble:</ion-label>
       <ion-datetime displayFormat="DD-MM-YYYY HH:mm" pickerFormat="DD-MMM-YYYY HH:mm" [(ngModel)]="closedForGamble"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label stacked>Pot:</ion-label>
+      <ion-input type="number" value="" [(ngModel)]="pot"></ion-input>
+    </ion-item>
     <div padding>
       <button ion-button color="secondary" full  (click)="addClicked()">Add</button>
     </div>

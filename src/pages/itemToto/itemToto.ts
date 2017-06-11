@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { AngularFire } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
-import firebase from 'firebase';
 import moment from 'moment';
 import { AlertController } from 'ionic-angular';
 
@@ -28,6 +27,8 @@ export class ItemToto {
   user;
   af;
   value;
+  currentDate;
+  closedForGamble;
 
   constructor(
     public alertCtrl: AlertController, 
@@ -52,7 +53,9 @@ export class ItemToto {
             })
             this.items.push(wobj);
           }
-      });   
+      });
+      this.closedForGamble = this.item.closedForGamble;
+      this.currentDate = moment().format('x');   
   }
 
   isComplete(item) {

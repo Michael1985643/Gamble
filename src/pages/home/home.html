@@ -2,6 +2,11 @@
   <ion-toolbar>
     <ion-title>Gambles</ion-title>
     <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="overview()">
+        <ion-icon name="podium"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="logOut()">
         <ion-icon name="md-log-out"></ion-icon>
       </button>
@@ -19,7 +24,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-item (press)="removeItem(item)" class="text" *ngFor="let item of items" (click)="goToItem(item)">
@@ -30,6 +34,7 @@
       <h2>{{item.name}}</h2>
       <h3>{{item.startDate | amDateFormat:'ddd DD-MM-YYYY'}}   {{item.endDate | amDateFormat:'ddd DD-MM-YYYY'}}</h3>
       <p><ion-icon name='close' item-left style="color: #55acee"></ion-icon> {{item.closedForGamble | amDateFormat:'ddd DD-MM-YYYY HH:mm:ss'}}</p>
+      <p><img src="../../assets/images/money-icon.png"><ion-icon name='logo-euro' style="font-size: 12px;"></ion-icon> {{item.pot}}</p>
       <ion-icon *ngIf="currentDate > item.closedForGamble" name='close-circle' item-right style="color: darkgrey"></ion-icon>
       <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
     </ion-item>

@@ -43,7 +43,9 @@ export class HomePage {
         this.allItems.length = 0;
         result.forEach(element => {
           element.forEach(item => {
-            this.items.push(item);
+            if (moment() < moment(item.closedForGamble)) { //show only open gambles
+              this.items.push(item);
+            }
             this.allItems.push(item);
           })
         });
@@ -58,14 +60,16 @@ export class HomePage {
   showMyOpenGambles () {
     this.items.length = 0;
      this.allItems.forEach(element => {
+       if (moment() < moment(element.closedForGamble)) {
         this.items.push(element);  
+       }
      });   
   }
 
   showMyClosedGambles () {
      this.items.length = 0;
      this.allItems.forEach(element => {
-       if (moment() > moment(element.closedForGamble)) {
+       if (moment() >= moment(element.closedForGamble)) {
          this.items.push(element);  
        }
      });   

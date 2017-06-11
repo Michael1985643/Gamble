@@ -31,6 +31,7 @@ export class AddToto {
   closedForGamble;
   linkedId;
   item;
+  pot;
 
   constructor(
     public navCtrl: NavController, 
@@ -68,7 +69,8 @@ export class AddToto {
         endDate:this.endDate,
         linked: "wedstrijden",
         linkedId: this.linkedId,
-        type: "toto"
+        type: "toto",
+        pot: parseInt(this.pot)
     }
     items.set(item);
     this.navCtrl.push(HomePage);    

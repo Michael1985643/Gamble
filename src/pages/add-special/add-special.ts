@@ -35,7 +35,8 @@ export class AddSpecial {
   wedstrijdselected: string;
   homeImage: string;
   awayImage: string;
-  
+  pot;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -89,7 +90,8 @@ export class AddSpecial {
         linkedId: this.speelronde == undefined ? "" : this.speelronde,
         linkedWedstrijdId: this.wedstrijdselected == undefined ? "" : this.wedstrijdselected,
         homeImage: this.homeImage,
-        awayImage: this.awayImage
+        awayImage: this.awayImage,
+        pot: parseInt(this.pot)
 
     }
     items.set(item);
