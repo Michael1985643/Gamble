@@ -1,14 +1,33 @@
 import { Injectable } from '@angular/core';
 import { AuthProviders, AngularFireAuth, FirebaseAuthState, AuthMethods } from 'angularfire2';
 
+//services
+import { UserService } from '../services/user-service';
+
+//models
+import { User } from '../models/user.model';
+
 @Injectable()
 export class AuthService {
   private authState: FirebaseAuthState;
 
-  constructor(public auth$: AngularFireAuth) {
+  constructor(public auth$: AngularFireAuth, public userService: UserService) {
+
     this.authState = auth$.getAuth();
     auth$.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
+      if (state) {
+        let userObj = state.auth;
+        let user = new User(
+              userObj.uid, 
+              userObj.displayName, 
+              userObj.email, 
+              userObj.photoURL,
+              "test",
+              "test"
+              )
+          this.userService.setUser(user);
+      }
     });
   }
 
@@ -35,7 +54,6 @@ export class AuthService {
   }
 
   displayName(): string {
-    debugger;
     if (this.authState != null) {
       return this.authState.google.displayName;
     } else {

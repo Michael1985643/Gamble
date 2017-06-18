@@ -24714,6 +24714,14 @@ page-itemToto ion-icon {
   font-size: 30px;
 }
 
+page-itemToto ion-grid {
+  padding: 0;
+}
+
+page-itemToto ion-row {
+  width: 100%;
+}
+
 page-login .login {
   background: no-repeat center;
   margin: auto;

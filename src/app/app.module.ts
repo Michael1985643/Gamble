@@ -19,6 +19,12 @@ import { AuthService } from '../providers/auth-service';
 import {MomentModule} from 'angular2-moment';
 import {Ng2OrderModule} from 'ng2-order-pipe';
 
+//services
+import { UserService } from '../services/user-service';
+import { TotoService } from '../services/toto-service';
+import { SpecialService } from '../services/special-service';
+import { GambleBaseService } from './../services/gamble-base-service';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyBX6jLr_Hr0s_5ig3pSYbzU3bhf6Iy0Kxg",
   authDomain: "gamble-69341.firebaseapp.com",
@@ -58,6 +64,10 @@ export const firebaseConfig = {
   ],
   providers: [
     AuthService,
+    UserService,
+    GambleBaseService,
+    TotoService,
+    SpecialService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

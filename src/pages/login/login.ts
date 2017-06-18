@@ -5,12 +5,12 @@ import { AuthService } from '../../providers/auth-service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the Login page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+//services
+import { UserService } from '../../services/user-service';
+
+//models
+import { User } from '../../models/user.model';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -19,7 +19,7 @@ export class Login {
 
   items: FirebaseListObservable<any[]>;
   af;
-  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService) {
+  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService, public userService: UserService) {
     this.af = af;
   }
 
@@ -38,21 +38,18 @@ export class Login {
   }
 
   private onSignInSuccess(): void {
-     const userObj = this._auth.auth$.getAuth().auth;
-     const user = {
-       email :  userObj.email,
-       displayName : userObj.displayName,
-       photoURL: userObj.photoURL,
-       uid: userObj.uid
-     }
-     const setUser = this.af.database.object('users/' + userObj.uid + '/');
-     setUser.set(user);
-     const getRole = this.af.database.object('/dnb/roles/' + userObj.uid).subscribe(result => {
-        this._auth.auth$.getAuth().auth["role"] = result.$value
+     let userObj = this._auth.auth$.getAuth().auth;
+     let user = new User(
+          userObj.uid, 
+          userObj.displayName, 
+          userObj.email, 
+          userObj.photoURL,
+          "test",
+          "test"
+          )
+
+     this.userService.setUser(user)
         this.navCtrl.push(HomePage);
-        getRole.unsubscribe();
-     })
-     
   }
 
 }
