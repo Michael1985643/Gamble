@@ -32,32 +32,32 @@ export class HomePage {
 
   order: string = 'closedForGamble';
   
-  constructor(
-    public alertCtrl: AlertController,
-    public navCtrl: NavController,
-    public af: AngularFire,
-    private _auth: AuthService,
-    public loadingCtrl: LoadingController,
-    public navParams: NavParams, 
-    public userService: UserService,
-    public totoService: TotoService,
-    public SpecialService: SpecialService
-    ) 
-    {
-      this.isAdmin = this.userService.isAdmin();
-      this.loading = this.loadingCtrl.create({
-              content: "Please wait...",
-      });
-      this.loading.present();
+constructor(
+  public alertCtrl: AlertController,
+  public navCtrl: NavController,
+  public af: AngularFire,
+  private _auth: AuthService,
+  public loadingCtrl: LoadingController,
+  public navParams: NavParams, 
+  public userService: UserService,
+  public totoService: TotoService,
+  public SpecialService: SpecialService
+  ) 
+  {
+    this.isAdmin = this.userService.isAdmin();
+    this.loading = this.loadingCtrl.create({
+            content: "Please wait...",
+    });
+    this.loading.present();
 
-      this.totoService.getOpen().subscribe((totos ) => {
-        this.SpecialService.getOpen().subscribe((specials ) => {
-          this.items = totos.concat(specials);
-        })
-        this.loading.dismiss(); 
+    this.totoService.getOpen().subscribe((totos ) => {
+      this.SpecialService.getOpen().subscribe((specials ) => {
+        this.items = totos.concat(specials);
       })
-      this.currentDate = moment().format('x');
-    }
+      this.loading.dismiss(); 
+    })
+    this.currentDate = moment().format('x');
+  }
 
   showMyOpenGambles () {
     this.totoService.getOpen().subscribe((totos ) => {
@@ -112,7 +112,7 @@ export class HomePage {
       })
   }
 
- goToItem(item: any)
+  goToItem(item: any)
   {
     if (item.type=="toto") {
      this.navCtrl.push(ItemToto, {
