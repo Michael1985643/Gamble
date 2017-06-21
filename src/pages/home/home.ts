@@ -1,3 +1,4 @@
+import { GambleBaseService } from './../../services/gamble-base-service';
 //out of the box
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -20,6 +21,9 @@ import { UserService } from '../../services/user-service';
 import { TotoService } from '../../services/toto-service';
 import { SpecialService } from '../../services/special-service';
 
+//import models
+import { User } from '../models/user.model';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -28,7 +32,7 @@ export class HomePage {
   items = [];
   loading: any;
   currentDate = moment().format('x');;
-  isAdmin: FirebaseObjectObservable<any> ;
+  isAdmin: boolean ;
 
   order: string = 'closedForGamble';
   
@@ -40,23 +44,30 @@ constructor(
   public loadingCtrl: LoadingController,
   public navParams: NavParams, 
   public userService: UserService,
+  public gambleBaseService: GambleBaseService,
   public totoService: TotoService,
   public SpecialService: SpecialService
   ) 
-  {
-    this.isAdmin = this.userService.isAdmin();
+  {  }
+
+  ionViewDidLoad() {
     this.loading = this.loadingCtrl.create({
             content: "Please wait...",
     });
-    this.loading.present();
-    this.totoService.getOpen().subscribe((totos ) => {
-      this.SpecialService.getOpen().subscribe((specials ) => {
-        this.items = totos.concat(specials);
+    //this.loading.present();
+    this.userService.isAdmin().subscribe((isAdmin ) => {
+      if (isAdmin) {
+        this.isAdmin = true;
+      }
+      this.totoService.getOpen().subscribe((totos ) => {
+        this.SpecialService.getOpen().subscribe((specials ) => {
+          this.items = totos.concat(specials);
+        })
+        this.loading.dismiss(); 
       })
-      this.loading.dismiss(); 
     })
-  }
 
+  }
   showMyOpenGambles () {
     this.totoService.getOpen().subscribe((totos ) => {
       this.SpecialService.getOpen().subscribe((specials ) => {

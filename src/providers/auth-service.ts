@@ -18,15 +18,6 @@ export class AuthService {
       this.authState = state;
       if (state) {
         let userObj = state.auth;
-        let user = new User(
-              userObj.uid, 
-              userObj.displayName, 
-              userObj.email, 
-              userObj.photoURL,
-              "test",
-              "test"
-              )
-          this.userService.setUser(user);
       }
     });
   }

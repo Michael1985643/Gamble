@@ -9,22 +9,15 @@ import { LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { HomePage } from '../../home/home';
 import moment from 'moment';
-import { Wedstrijden } from '../../../providers/wedstrijden';
+import { WedstrijdService } from '../../../services/wedstrijd-service';
 
-/**
- * Generated class for the AddSpecial page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-add-special',
-  templateUrl: 'add-special.html',
-  providers: [Wedstrijden]
+  templateUrl: 'add-special.html'
 })
 export class AddSpecial {
-  af: any;
   loading: any;
   id: string;
   name: string;
@@ -43,25 +36,22 @@ export class AddSpecial {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    af: AngularFire,
+    private af: AngularFire,
     private _auth: AuthService,
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,
-    public wedstrijden: Wedstrijden,
+    public wedstrijdService: WedstrijdService,
     public specialService: SpecialService,
     public sharedFunctions: SharedFunctions) 
     {
-      this.af = af;
       this.loading = this.loadingCtrl.create({
-          content: "Please wait...",
+            content: "Please wait...",
       });
       this.loading.present();
-      this.wedstrijden.getWedstrijden()
-        .then(speelrondes => {
-          this.speelrondes = speelrondes;
-          this.loading.dismiss();  
-        }
-      );
+      this.wedstrijdService.getAll().subscribe(results => {
+        this.speelrondes = results;
+        this.loading.dismiss();
+      })
     }
 
   speelrondeSelected() {
@@ -79,8 +69,8 @@ export class AddSpecial {
 
   addClicked() {
     //this date conversion is needed because the icon date picker month start with 1 while moments starts with 0
-    this.closedForGamble = (typeof this.closedForGamble) == "object" ? moment(this.changeIonicDateTime(this.closedForGamble, 1)).unix()*1000  : moment(this.closedForGamble).unix()*1000;
-    this.specialDate = (typeof this.specialDate) == "object" ? moment(this.changeIonicDateTime(this.specialDate, 1)).unix()*1000 : moment(this.specialDate).unix()*1000;
+    this.closedForGamble = (typeof this.closedForGamble) == "object" ? moment(this.sharedFunctions.changeIonicDateTime(this.closedForGamble, 1)).unix()*1000  : moment(this.closedForGamble).unix()*1000;
+    this.specialDate = (typeof this.specialDate) == "object" ? moment(this.sharedFunctions.changeIonicDateTime(this.specialDate, 1)).unix()*1000 : moment(this.specialDate).unix()*1000;
     let linked = this.wedstrijdselected == undefined ? "" : this.wedstrijdselected;
     let linkedId = this.speelronde == undefined ? "" : this.speelronde;
     let linkedWedstrijdId = this.wedstrijdselected == undefined ? "" : this.wedstrijdselected;
@@ -100,31 +90,6 @@ export class AddSpecial {
         parseInt(this.pot)
     )
     this.specialService.add(special)
-    this.navCtrl.push(HomePage);    
-
-    // const items = this.af.database.object('dnb/gambles/specials/' + this.id);
-    // let item = {  
-    //     id: this.id,
-    //     name: this.name,
-    //     closedForGamble: this.closedForGamble,
-    //     date: this.specialDate,
-    //     home: this.home,
-    //     away: this.away,
-    //     type: "special",
-    //     linked: this.wedstrijdselected == undefined ? "" : this.wedstrijdselected,
-    //     linkedId: this.speelronde == undefined ? "" : this.speelronde,
-    //     linkedWedstrijdId: this.wedstrijdselected == undefined ? "" : this.wedstrijdselected,
-    //     homeImage: this.homeImage,
-    //     awayImage: this.awayImage,
-    //     pot: parseInt(this.pot)
-
-    // }
-    // items.set(item);
-    // this.navCtrl.push(HomePage);    
-  }
-
-  changeIonicDateTime(jsonDate, minusInt) {
-      jsonDate.month = jsonDate.month - minusInt;
-      return jsonDate
+    this.navCtrl.push(HomePage);      
   }
 }

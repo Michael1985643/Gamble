@@ -1,3 +1,4 @@
+import { Welcome } from './../pages/welcome/welcome';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     AddToto,
     AddSpecial,
     Overview,
-    TotoOverview
+    TotoOverview,
+    Welcome
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ export const firebaseConfig = {
     AddToto,
     AddSpecial,
     Overview,
-    TotoOverview
+    TotoOverview,
+    Welcome
   ],
   providers: [
     AuthService,

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AuthService } from '../providers/auth-service';
 import moment from 'moment';
 import 'rxjs/add/operator/map';
 
@@ -9,17 +10,18 @@ import { GambleBaseModel } from '../models/gamble.base.model';
 @Injectable()
 export class GambleBaseService {
   items: FirebaseListObservable<any[]>;
+  subscription: string;
   location: string;
 
-  constructor(public af: AngularFire) {
+  constructor(public af: AngularFire, public _auth: AuthService) {
   }
 
   public getAll(): FirebaseListObservable<any[]> {
-    return this.af.database.list(this.location);
+    return this.af.database.list(this._auth.userService.user["subscription"] + this.location);
   }
 
   public getOpen(): FirebaseListObservable<any[]> {
-    return this.af.database.list(this.location).map(result => {
+    return this.af.database.list(this._auth.userService.user["subscription"] + this.location).map(result => {
       var arrTotosOpen = [];
        for (var index = 0; index < result.length; index++) {
          if (this.isOpen(result[index]) === true) {
@@ -31,7 +33,7 @@ export class GambleBaseService {
   }
 
   public getClosed(): FirebaseListObservable<any[]> {
-    return this.af.database.list(this.location).map(result => {
+    return this.af.database.list(this._auth.userService.user["subscription"] + this.location).map(result => {
       var arrTotosClosed = [];
        for (var index = 0; index < result.length; index++) {
          if (this.isOpen(result[index]) === false) {
@@ -43,7 +45,7 @@ export class GambleBaseService {
   }
 
   public remove(id) {
-    this.af.database.object(this.location + '/' + id).remove();
+    this.af.database.object(this._auth.userService.user["subscription"] + this.location + '/' + id).remove();
   }
 
   private isOpen(gamble: GambleBaseModel): boolean {

@@ -41,7 +41,7 @@
       <ion-icon *ngIf="currentDate < item.closedForGamble" name='checkmark-circle' item-right style="color: #7CBD26"></ion-icon>
     </ion-item>
   </ion-list>
-    <ion-fab right bottom *ngIf="isAdmin | async" >
+    <ion-fab right bottom *ngIf="isAdmin" >
     <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab (click)="addToto(item)"><img src="../../assets/images/football-icon.png"></button>

@@ -1,3 +1,5 @@
+import { Welcome } from './../pages/welcome/welcome';
+import { UserService } from '../services/user-service';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,17 +15,28 @@ import { AngularFire } from 'angularfire2';
 export class MyApp {
   rootPage:any = Login;
 
-  constructor(platform: Platform, af: AngularFire, statusBar: StatusBar, splashScreen: SplashScreen) {
-
-    const authObserver = af.auth.subscribe( user => {
+  constructor(platform: Platform, af: AngularFire, statusBar: StatusBar, splashScreen: SplashScreen, userService: UserService) {
+    let authObserver = af.auth.subscribe( user => {
       if (user) {
-
-        this.rootPage = HomePage;
-        authObserver.unsubscribe();
-      } else {
-        this.rootPage = Login;
-        authObserver.unsubscribe();
+        userService.setUser(user).then(( ) => {
+          userService.getUser(user.uid).subscribe((appUser ) => {
+            userService.getSubscription(user.uid).subscribe((subscription ) => {
+              appUser.subscription = subscription;
+              userService.user = appUser;
+              if (subscription) {
+                this.rootPage = HomePage;
+              }
+              else {
+                this.rootPage = Welcome;
+              }
+            })
+          })
+        })
       }
+      else {
+        this.rootPage = Login;
+      }
+     authObserver.unsubscribe();
     });
 
     platform.ready().then(() => {

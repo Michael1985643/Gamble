@@ -47,7 +47,7 @@ export class ItemSpecial {
 
   setSpecial() {
     if (!this.isValid()) { return; };
-    this.specialService.setPlayerSpecial(this.item.id, this.user.uid, this.homeGoals, this.awayGoals)
+    this.specialService.setPlayerSpecial(this.item.id, this.user.uid, this.homeGoals, this.awayGoals, this._auth.userService.user["nickName"])
   }
 
   isValid() {

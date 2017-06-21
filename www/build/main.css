@@ -24734,3 +24734,16 @@ page-itemToto ion-grid {
 page-itemToto ion-row {
   width: 100%;
 }
+
+page-welcome .content {
+  background-color: green;
+  text-align: center;
+  color: white;
+}
+
+page-welcome ion-grid {
+  height: 100%;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}

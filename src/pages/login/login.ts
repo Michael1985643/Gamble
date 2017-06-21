@@ -1,3 +1,4 @@
+import { Welcome } from './../welcome/welcome';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -18,9 +19,7 @@ import { User } from '../../models/user.model';
 export class Login {
 
   items: FirebaseListObservable<any[]>;
-  af;
-  constructor(public navCtrl: NavController,af: AngularFire,private _auth: AuthService, public userService: UserService) {
-    this.af = af;
+  constructor(public navCtrl: NavController,private af: AngularFire,private _auth: AuthService, public userService: UserService) {
   }
 
   signInWithFacebook(): void {
@@ -38,18 +37,20 @@ export class Login {
   }
 
   private onSignInSuccess(): void {
-     let userObj = this._auth.auth$.getAuth().auth;
-     let user = new User(
-          userObj.uid, 
-          userObj.displayName, 
-          userObj.email, 
-          userObj.photoURL,
-          "test",
-          "test"
-          )
-
-     this.userService.setUser(user)
-        this.navCtrl.push(HomePage);
+        this.userService.setUser(this._auth.auth$.getAuth()).then(( ) => {
+          this.userService.getUser(this._auth.auth$.getAuth().auth.uid).subscribe((appUser ) => {
+            this.userService.getSubscription(this._auth.auth$.getAuth().auth.uid).subscribe((subscription ) => {
+              appUser.subscription = subscription;
+              this.userService.user = appUser;
+              if (subscription) {
+                this.navCtrl.push(HomePage);
+              }
+              else {
+                this.navCtrl.push(Welcome);
+              }
+            })
+          })
+        })
   }
 
 }

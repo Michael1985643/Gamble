@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 504:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_special__ = __webpack_require__(122);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSpecialModule", function() { return AddSpecialModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__item_special__ = __webpack_require__(123);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ItemSpecialModule", function() { return ItemSpecialModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddSpecialModule = (function () {
-    function AddSpecialModule() {
+var ItemSpecialModule = (function () {
+    function ItemSpecialModule() {
     }
-    return AddSpecialModule;
+    return ItemSpecialModule;
 }());
-AddSpecialModule = __decorate([
+ItemSpecialModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */],
+            __WEBPACK_IMPORTED_MODULE_2__item_special__["a" /* ItemSpecial */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__item_special__["a" /* ItemSpecial */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__add_special__["a" /* AddSpecial */]
+            __WEBPACK_IMPORTED_MODULE_2__item_special__["a" /* ItemSpecial */]
         ]
     })
-], AddSpecialModule);
+], ItemSpecialModule);
 
-//# sourceMappingURL=add-special.module.js.map
+//# sourceMappingURL=item-special.module.js.map
 
 /***/ })
 

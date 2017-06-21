@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AuthService } from '../../providers/auth-service';
 
 @Injectable()
 export class WedstrijdService {
