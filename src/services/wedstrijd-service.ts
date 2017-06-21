@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-/*
-  Generated class for the WedstrijdService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class WedstrijdService {
 
-  constructor(public http: Http) {
+  constructor(public af: AngularFire) {
     console.log('Hello WedstrijdService Provider');
   }
 
+  public getAll(): FirebaseListObservable<any[]> {
+    return this.af.database.list('/data/wedstrijden').map(result => {
+      var arr = [];
+       for (var index = 0; index < result.length; index++) {
+          arr.push(result[index]);
+       }
+       return arr;
+    }) as FirebaseListObservable<any[]>;
+   }
+
+  public getWedstrijden(id, wedstrijdid): FirebaseListObservable<any[]> {
+    return this.af.database.list('/data/' + id + '/' + wedstrijdid).map(result => {
+      var arr = [];
+       for (var index = 0; index < result.length; index++) {
+          arr.push(result[index]);
+       }
+       return arr;
+    }) as FirebaseListObservable<any[]>;
+   }
 }

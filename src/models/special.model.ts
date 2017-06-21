@@ -8,9 +8,10 @@ export class Special{
         public homeImage: string,
         public awayImage: string,
         public closedForGamble: number,
-        public linked: number,
-        public linkedId: number,
-        public linkedWedstrijdId: number,
-        public pot: number
+        public linked: string,
+        public linkedId: string,
+        public linkedWedstrijdId: string,
+        public pot: number,
+        public type: string = "special"
 	){	}
 }

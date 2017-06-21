@@ -1,3 +1,5 @@
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,12 +8,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ItemToto } from '../pages/itemToto/itemToto';
-import { AddToto } from '../pages/add-toto/add-toto';
-import { ItemSpecial } from '../pages/item-special/item-special';
-import { AddSpecial } from '../pages/add-special/add-special';
+import { ItemToto } from '../pages/totos/itemToto/itemToto';
+import { AddToto } from '../pages/totos/add-toto/add-toto';
+import { ItemSpecial } from '../pages/specials/item-special/item-special';
+import { AddSpecial } from '../pages/specials/add-special/add-special';
 import { Login } from '../pages/login/login';
 import { Overview } from '../pages/overview/overview';
+import { TotoOverview } from '../pages/totos/toto-overview/toto-overview';
 
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/auth-service';
@@ -24,6 +27,8 @@ import { UserService } from '../services/user-service';
 import { TotoService } from '../services/toto-service';
 import { SpecialService } from '../services/special-service';
 import { GambleBaseService } from './../services/gamble-base-service';
+import { WedstrijdService} from '../services/wedstrijd-service';
+import { SharedFunctions } from '../shared/shared-functions';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBX6jLr_Hr0s_5ig3pSYbzU3bhf6Iy0Kxg",
@@ -42,7 +47,8 @@ export const firebaseConfig = {
     ItemSpecial,
     AddToto,
     AddSpecial,
-    Overview
+    Overview,
+    TotoOverview
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,8 @@ export const firebaseConfig = {
     ItemSpecial,
     AddToto,
     AddSpecial,
-    Overview
+    Overview,
+    TotoOverview
   ],
   providers: [
     AuthService,
@@ -68,6 +75,8 @@ export const firebaseConfig = {
     GambleBaseService,
     TotoService,
     SpecialService,
+    WedstrijdService,
+    SharedFunctions,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -30,5 +30,4 @@ export class UserService {
       return value
     }) as FirebaseObjectObservable<any[]>;
   }
-
 }

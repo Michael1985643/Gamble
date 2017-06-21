@@ -10,10 +10,10 @@ import moment from 'moment';
 //pages
 import { Login } from '../login/login';
 import { Overview } from '../overview/overview';
-import { ItemToto } from '../itemToto/itemToto';
-import { AddToto } from '../add-toto/add-toto';
-import { ItemSpecial } from '../item-special/item-special';
-import { AddSpecial } from '../add-special/add-special';
+import { ItemToto } from '../totos/itemToto/itemToto';
+import { AddToto } from '../totos/add-toto/add-toto';
+import { ItemSpecial } from '../specials/item-special/item-special';
+import { AddSpecial } from '../specials/add-special/add-special';
 
 //services
 import { UserService } from '../../services/user-service';
@@ -27,7 +27,7 @@ import { SpecialService } from '../../services/special-service';
 export class HomePage {
   items = [];
   loading: any;
-  currentDate;
+  currentDate = moment().format('x');;
   isAdmin: FirebaseObjectObservable<any> ;
 
   order: string = 'closedForGamble';
@@ -49,14 +49,12 @@ constructor(
             content: "Please wait...",
     });
     this.loading.present();
-
     this.totoService.getOpen().subscribe((totos ) => {
       this.SpecialService.getOpen().subscribe((specials ) => {
         this.items = totos.concat(specials);
       })
       this.loading.dismiss(); 
     })
-    this.currentDate = moment().format('x');
   }
 
   showMyOpenGambles () {

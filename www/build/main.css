@@ -24666,6 +24666,19 @@ ion-navbar.toolbar {
   }
 }
 
+page-login .login {
+  background: no-repeat center;
+  margin: auto;
+  display: block;
+}
+
+page-login .vertical-align-content > * {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  margin-top: 100px !important;
+}
+
 page-item-special .vertical-align-content > * {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24720,17 +24733,4 @@ page-itemToto ion-grid {
 
 page-itemToto ion-row {
   width: 100%;
-}
-
-page-login .login {
-  background: no-repeat center;
-  margin: auto;
-  display: block;
-}
-
-page-login .vertical-align-content > * {
-  display: -webkit-flex !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-  margin-top: 100px !important;
 }
