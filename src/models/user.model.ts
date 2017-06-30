@@ -6,6 +6,7 @@ export class User{
         public nickName: string;
         public role: string;
         public lastLoginDate: number;
+        public subscription: string;
 	constructor(
 	){	}
 }

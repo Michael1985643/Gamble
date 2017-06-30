@@ -66,20 +66,20 @@ export class ItemToto {
     }
   }
 
-  private itemClicked(item, teamName, event) {
+  private itemClicked(item, toto) {
     if (moment() > moment(this.item.closedForGamble)) {
       this.showAlertIsClosed();
       return
     }
 
-    if (teamName == item.selectedItem) {
+    if (toto == item.selectedItem) {
       item.selectedItem = "";
       this.totoService.removePlayerToto(this.item.id ,this.user.uid, item.id);
     }
     else 
     {
-      item.selectedItem = teamName;
-      this.totoService.setPlayerToto(this.item.id ,this.user.uid, item.id, teamName);
+      item.selectedItem = toto;
+      this.totoService.setPlayerToto(this.item.id ,this.user.uid, item.id, toto);
         //items.set(firebase.database.ServerValue.TIMESTAMP);
         //timestamp = https://www.epochconverter.com/ UTC
     }
@@ -95,6 +95,9 @@ export class ItemToto {
   }
 
   private overview()  {
-    this.navCtrl.push(TotoOverview);
+    this.navCtrl.push(TotoOverview, {
+       item: this.item
+     });
+
   }
 }

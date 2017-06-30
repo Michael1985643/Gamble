@@ -36,6 +36,12 @@ export class UserService {
     }) as FirebaseObjectObservable<any[]>;
   }
 
+  public getAllPlayers(subscription) {
+    return this.af.database.list(subscription + '/players/playerInfo').map((players) => {  
+        return players;
+    }) as FirebaseObjectObservable<any[]>;
+  }
+
   public isAdmin (): FirebaseObjectObservable<any> {
     return this.af.database.object('/dnb/roles/' + this.user.uid).map((value) => {
       this.user.role = value.$value

@@ -29,7 +29,7 @@
             <h1>{{item.goalsHomeTeam}}</h1>
           </ion-col>           
           <ion-col align-self-center>
-            <button color="light" full (click)="itemClicked(item,item.homeTeamName, $event)" [class.active]="item.selectedItem == item.homeTeamName" ion-button small>{{item.homeTeamName}}</button>
+            <button color="light" full (click)="itemClicked(item, 1)" [class.active]="item.selectedItem == 1" ion-button small>{{item.homeTeamName}}</button>
           </ion-col>
         <ion-col col-1 align-self-center *ngIf="currentDate > closedForGamble">
             <ion-icon *ngIf="isComplete(item) == true && ( (item.selectedItem == item.homeTeamName && item.goalsHomeTeam > item.goalsAwayTeam) || (item.selectedItem == null && item.goalsHomeTeam == item.goalsAwayTeam) )" name='happy' item-right style="color: #7CBD26"></ion-icon>
@@ -46,7 +46,7 @@
             <h1>{{item.goalsAwayTeam}}</h1>
         </ion-col>         
         <ion-col align-self-center>
-            <button color="light" full (click)="itemClicked(item,item.awayTeamName, $event)" [class.active]="item.selectedItem == item.awayTeamName" ion-button small>{{item.awayTeamName}}</button>
+            <button color="light" full (click)="itemClicked(item, 2)" [class.active]="item.selectedItem == 2" ion-button small>{{item.awayTeamName}}</button>
         </ion-col>
         <ion-col col-1 align-self-center *ngIf="currentDate > closedForGamble">
             <ion-icon *ngIf="isComplete(item) == true && ( (item.selectedItem == item.awayTeamName && item.goalsAwayTeam > item.goalsHomeTeam) )" name='happy' item-right style="color: #7CBD26"></ion-icon>
