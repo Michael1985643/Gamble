@@ -16,7 +16,11 @@ export class WedstrijdService {
     return this.af.database.list('/data/wedstrijden').map(result => {
       var arr = [];
        for (var index = 0; index < result.length; index++) {
-          arr.push(result[index]);
+         let wedstrijd = {};
+         for (var i = 0; i < result[index].length; i++) {
+          wedstrijd[parseInt(result[index][i].id)] = result[index][i];
+         }
+         arr.push(wedstrijd);
        }
        return arr;
     }).publishReplay(1).refCount() as FirebaseListObservable<any[]>;
@@ -26,19 +30,19 @@ export class WedstrijdService {
     return this.getAll().map(result => {
       let wedstrijdenObj = {}
       let speelronde = result[wedstrijdid - 1];
-      speelronde.forEach(wedstrijd => {
-        wedstrijd["toto"] = this.calculateToto(wedstrijd.goalsHomeTeam, wedstrijd.goalsAwayTeam)
-      });
+      for (var key in speelronde) {
+        speelronde[key]["toto"] = this.calculateToto(speelronde[key].goalsHomeTeam, speelronde[key].goalsAwayTeam)
+      };
       return speelronde
     }) as FirebaseListObservable<any[]>;
    }
 
    calculateToto (goalsHomeTeam, goalsAwayTeam) {
     let toto;
-    if (goalsHomeTeam < goalsAwayTeam) {
+    if (goalsHomeTeam > goalsAwayTeam) {
       toto = 1;
     }
-    if (goalsHomeTeam > goalsAwayTeam) {
+    if (goalsHomeTeam < goalsAwayTeam) {
       toto = 2;
     }
     if (goalsHomeTeam == goalsAwayTeam) {

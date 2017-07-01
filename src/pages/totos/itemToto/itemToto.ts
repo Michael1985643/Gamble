@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../../providers/auth-service';
@@ -24,6 +25,7 @@ export class ItemToto {
   user;
   currentDate = moment().format('x');
   closedForGamble;
+  nickName: string;
 
   constructor(
     public alertCtrl: AlertController, 
@@ -33,26 +35,40 @@ export class ItemToto {
     private _auth: AuthService,
     public loadingCtrl: LoadingController,
     public totoService: TotoService,
-    public wedstrijdService: WedstrijdService) 
+    public wedstrijdService: WedstrijdService,
+    public userService: UserService) 
     {
       this.user = _auth.auth$.getAuth().auth;
       this.item = this.navParams.get('item');
       this.closedForGamble = this.item.closedForGamble;
-      this.getWedstrijdenAndRelateToPlayerGamble();
-
+      if (this.navParams.get('nickName')) { //LOAD FROM TOTO OVERVIEW PER USER
+        this.nickName = this.navParams.get('nickName');
+        userService.getAllPlayers(this.userService.user.subscription).subscribe((players ) => {
+          players.forEach(player => {
+            if (player.nickName == this.navParams.get('nickName')) {
+              this.getWedstrijdenAndRelateToPlayerGamble(player.$key);
+            }
+          });
+        })
+      }
+      else { //load default from home
+        this.getWedstrijdenAndRelateToPlayerGamble(this.user.uid);
+      }
     }
 
-  private getWedstrijdenAndRelateToPlayerGamble () {
+  private getWedstrijdenAndRelateToPlayerGamble (uid) {
+    var items =[];
     this.wedstrijdService.getWedstrijden(this.item.linked, this.item.linkedId).subscribe((wedstrijden ) => {
-      this.totoService.getPlayerGamble(this.item.id, this.user.uid).subscribe((playerGamble ) => {
-          wedstrijden.forEach(wedstrijdObject => {
-            playerGamble.forEach(playerObject => {
-                if (playerObject.$key == wedstrijdObject.id) {
-                  wedstrijdObject.selectedItem = playerObject.$value;
-                }
-            })
-        });
-        this.items = wedstrijden;
+      this.totoService.getPlayerGamble(this.item.id, uid).subscribe((playerGamble ) => {
+        for (var key in wedstrijden) {
+          playerGamble.forEach(playerObject => {
+              if (playerObject.$key == key) {
+                wedstrijden[key].selectedItem = playerObject.$value;
+              }
+          })
+          items.push(wedstrijden[key])
+        };
+        this.items = items;
       })
     })
   }
